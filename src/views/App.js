@@ -1,5 +1,5 @@
 import './App.scss';
-import Header from './components/Header';
+import Header from './Navbar';
 
 const App = () => {
     return (

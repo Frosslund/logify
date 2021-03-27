@@ -1,6 +1,6 @@
-import Button from './Button';
+import Button from './components/Button';
 
-const Header = () => {
+const Navbar = () => {
     return (
         <header>
             <h1>Logify</h1>
@@ -11,4 +11,4 @@ const Header = () => {
     );
 }
 
-export default Header;
+export default Navbar;
