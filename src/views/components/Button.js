@@ -1,10 +1,10 @@
-const Button = ({ color, text }) => {
-    return <button style={{ backgroundColor: color }}>{text}</button>
+const Button = ({ color, text, onClick }) => {
+	return <button style={{ backgroundColor: color }} onClick={onClick}>{text}</button>
 }
 
 Button.defaultProps = {
-    color: 'black',
-    text: 'Button'
+	color: 'black',
+	text: 'Button'
 }
 
 export default Button
