@@ -1,4 +1,4 @@
-import './App.scss';
+import '../App.scss';
 import Header from './Navbar';
 
 const App = () => {
