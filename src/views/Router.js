@@ -1,7 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 import HomeView from './HomeView';
-import RedirectPage from './RedirectPage';
+import RedirectPage from '../utils/RedirectPage';
 import LogView from './LogView';
 
 
