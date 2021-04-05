@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { get } from '../utils/api';
+import { checkUser } from '../utils/firebaseConfig';
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -35,10 +36,10 @@ export const fetchUser = () => {
     return async dispatch => {
         try {
             const data = await get(REACT_APP_BASE_URL + '/me')
-            console.log(data)
             dispatch(setUserName(data.display_name ? data.display_name : data.id))
             dispatch(setUserId(data.id))
             dispatch(setLoggedIn(true))
+            checkUser(data)
         } catch (err) {
             console.log(err)
         }
