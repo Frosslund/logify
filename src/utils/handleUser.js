@@ -9,25 +9,41 @@ import { syncUser } from '../slices/userDataSlice';
 const { REACT_APP_BASE_URL } = process.env;
 
 export const HandleUser = () => {
+    const dispatch = useDispatch();
 
     const getUserInfo = async () => {
         try {
-            const data = await get(REACT_APP_BASE_URL + '/me');
-            return data;
+            const user = await get(REACT_APP_BASE_URL + '/me');
+            //dispatch(fetchUser(data));
+            let docRef = db.collection('users').doc(user.id);
+            let doc = await docRef.get();
+            if (doc.exists) {
+                console.log("hej")
+                dispatch(syncUser(doc.data()));
+            } else {
+                setUser(user)
+            }
         } catch (err) {
             console.log(err)
         }
          
     }  
 
-    const getUserData = async (user) => {
+/*     const getUserData = async (user) => {
+        console.log(user)
         try {
             let docRef = db.collection('users').doc(user.id);
-            return await docRef.get();
+            let doc = await docRef.get();
+            if (doc.exists) {
+                console.log("hej")
+                dispatch(syncUser(doc.data()));
+            } else {
+                setUser(user)
+            }
         } catch(err) {
             console.log(err)
         }  
-    }
+    } */
 
     const setUser = async (user) => {
         try {
@@ -43,19 +59,6 @@ export const HandleUser = () => {
         }  
     }
 
-    const dispatch = useDispatch();
-
-    const user = async () => await get(REACT_APP_BASE_URL + '/me');
-    //const user = getUserInfo();
-    dispatch(fetchUser(user()));
-        
-/*         console.log(user.id)
-        //dispatch(fetchUser(user));
-        const userData = getUserData(user);
-        if (userData.exists) {
-            dispatch(syncUser(userData.data()))
-        }
-        else {
-            setUser(user)
-        } */
+    getUserInfo();
+    
 }

@@ -6,7 +6,7 @@ import '../App.scss';
 import { HandleUser } from '../utils/handleUser';
 
 const App = () => {
-	if (!(localStorage.length === 0)) HandleUser();
+	if ((localStorage.loggedIn)) HandleUser();
 	return (
 		<BrowserRouter>
 			<div className="App">

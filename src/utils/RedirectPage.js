@@ -19,6 +19,7 @@ const RedirectPage = ({ history, location }) => {
 		const expiryTime = new Date().getTime() + access_token.expires_in * 1000;
 		localStorage.setItem('params', JSON.stringify(access_token));
 		localStorage.setItem('expiry_time', expiryTime);
+		localStorage.setItem('loggedIn', true);
 		//dispatch(fetchUser())
 		history.push('/home');
 	} catch (error) {
