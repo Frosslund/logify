@@ -3,9 +3,10 @@ import Navbar from './Navbar';
 import Router from './Router';
 
 import '../App.scss';
-
+import { HandleUser } from '../utils/handleUser';
 
 const App = () => {
+	if ((localStorage.loggedIn)) HandleUser();
 	return (
 		<BrowserRouter>
 			<div className="App">
