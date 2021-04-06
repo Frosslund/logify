@@ -32,14 +32,15 @@ export const userSelector = state => state.user
 
 export default userSlice.reducer
 
-export const fetchUser = () => {
-    return async dispatch => {
+export const fetchUser = (data) => {
+    return dispatch => {
         try {
-            const data = await get(REACT_APP_BASE_URL + '/me')
+            //const data = await get(REACT_APP_BASE_URL + '/me');
+            console.log(data)
             dispatch(setUserName(data.display_name ? data.display_name : data.id))
             dispatch(setUserId(data.id))
             dispatch(setLoggedIn(true))
-            checkUser(data)
+            //checkUser(data)
         } catch (err) {
             console.log(err)
         }

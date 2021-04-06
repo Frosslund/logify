@@ -3,6 +3,8 @@ import 'firebase/firestore';
 import 'firebase/auth';
 import { get } from './api';
 
+import { syncUser } from '../slices/userDataSlice';
+
 const { REACT_APP_BASE_URL } = process.env;
 
 const firebaseConfig = {
@@ -37,11 +39,13 @@ export const checkUser = async (user) => {
     let docRef = db.collection('users').doc(user.id);
     let doc = await docRef.get();
     if (doc.exists) {
-        console.log(doc.data().name)
+        console.log(doc.data())
+        syncUser(doc.data())
     } else {
         setUser(user)
     }
 }
+
 
 export const updateFirestoreState = async (payload) => {
     try {
