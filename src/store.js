@@ -7,13 +7,15 @@ import logReducer from './slices/logSlice';
 import userDataReducer from './slices/userDataSlice';
 import searchReducer from './slices/searchSlice';
 //import firebase from './utils/firebaseConfig';
+import albumReducer from './slices/albumSlice';
 
 const store = configureStore({
     reducer: {
         user: userReducer,
         userData: userDataReducer,
         log: logReducer,
-        search: searchReducer
+        search: searchReducer,
+        album: albumReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production',

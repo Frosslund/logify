@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import _ from 'lodash';
-import { useDispatch } from 'react-redux';
 
 import { getParamValues } from './getParamValues';
 import { fetchUser } from '../slices/userSlice';
