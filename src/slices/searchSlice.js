@@ -41,7 +41,10 @@ export const initiateSearch = (searchTerm) => {
             albumIds.length > 20 ? albumIds = albumIds.slice(0, 20) : albumIds = albumIds
             const data = await get(REACT_APP_BASE_URL + `/albums?ids=${albumIds.toString()}`)
             const sortedAlbums = data.albums.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
-            dispatch(setTopResult(sortedAlbums[0].popularity > artistData[0].popularity ? sortedAlbums[0] : artistData[0]))
+            console.log(artistData[0])
+            console.log(sortedAlbums[0])
+            /* dispatch(setTopResult(sortedAlbums[0].popularity > artistData[0].popularity ? sortedAlbums[0] : artistData[0])) */
+            dispatch(setTopResult(sortedAlbums[0]))
             dispatch(setAlbumResults(sortedAlbums))
             dispatch(setArtistsResults(artistData))
         } catch (err) {
