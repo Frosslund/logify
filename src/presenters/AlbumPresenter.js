@@ -1,5 +1,6 @@
 import AlbumView from "../views/AlbumView"
 import { connect } from "react-redux";
+import { addToLog } from "../slices/logSlice";
 
 const mapStateToProps = (state) => {
     return {
@@ -9,14 +10,14 @@ const mapStateToProps = (state) => {
         totalTracks: state.album.totalTracks,
         images: state.album.images,
         released: state.album.released,
-        runningTime: state.album.runningTime,
+        runningTime: state.album.runningTime_ms,
         popularity: state.album.popularity
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        doSearch: undefined
+        onAddToLog: (res) => dispatch(addToLog({...res, id: Date(), dateAdded: Date()}))
     };
 }
 

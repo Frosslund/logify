@@ -1,5 +1,102 @@
-$blue: #004bb4;
+$text: #ffffff;
+/* 
+body {
+  font-family: "Circular";
+  background: linear-gradient(#a164e6, #4b58e9);
+  text-align: left;
+  color: $text;
+} */
 
-h1 {
-    color: $blue;
+.albumView {
+  margin: auto;
+  width: 60%;
+  padding: 20px;
+
+  .top {
+    display: flex;
+
+    .image {
+      display: inline;
+      width: 40%;
+      height: auto;
+      //box-shadow: -10px 10px 50px rgb(77, 77, 77);
+    }
+
+    .title {
+      display: inline;
+      padding-left: 40px;
+      text-shadow: -10px 10px 50px rgb(77, 77, 77);
+
+      .tighter {
+        line-height: 0.3;
+      }
+
+      .normal {
+        line-height: 2;
+      }
+
+      table {
+        border-collapse: separate;
+        //border: 2px solid rgb(200, 200, 200);
+        //font-size: 0.8rem;
+        text-align: ":" left;
+      }
+
+      td,
+      th {
+        //border: 1px solid rgb(190, 190, 190);
+        padding-inline-end: 10px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+.logView {
+  /*   margin: auto;
+  width: 60%;
+  padding: 20px; */
+
+  .logTable {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .logTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  .logTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  .logTable th,
+  .logTable td {
+    padding: 12px 15px;
+  }
+
+  .logTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .logTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  .logTable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+  }
+
+  .logTable tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+  }
 }

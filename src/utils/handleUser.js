@@ -17,7 +17,6 @@ export const HandleUser = () => {
             let docRef = db.collection('users').doc(user.id);
             let doc = await docRef.get();
             if (doc.exists) {
-                console.log("hej")
                 dispatch(syncUser(doc.data()));
             } else {
                 setUser(user)
