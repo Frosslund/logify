@@ -65,7 +65,7 @@ export const albumSelector = state => state.album
 
 export default albumSlice.reducer
 
-export const fetchAlbum = (id) => {
+export const fetchAlbum = (album) => {
 
     const fixArtists = (data) => {
         const artists = [];
@@ -89,11 +89,11 @@ export const fetchAlbum = (id) => {
 
     return async dispatch => {
         try {
-            const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
+            //const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
             const artists = fixArtists(album.artists) 
             const trackFix = fixTracks(album.tracks.items) 
             console.log(album)
-            dispatch(setId(id))
+            dispatch(setId(album.id))
             dispatch(setName(album.name))           
             dispatch(setArtists(artists))
             dispatch(setTracks(trackFix[0]))

@@ -1,18 +1,18 @@
 
 const AlbumView = (props) => {
 	
-/* 	const { 
+	const { 
 		name,
 		artists,
 		tracks,
 		totalTracks,
 		images,
 		released,
-		runningTime,
+		runningTime_ms,
 		popularity 
-	} = props; */
+	} = props;
 
-	const {
+	/* const {
 		id,
 		name,
 		artists,
@@ -127,7 +127,7 @@ const AlbumView = (props) => {
 		released: "1969",
 		runningTime_ms: 2849701,
 		popularity: 83
-	};
+	}; */
 
 	return (
 		<div class="albumView">

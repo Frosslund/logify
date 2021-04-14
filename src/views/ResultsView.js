@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import _ from 'lodash'; 
 
-const ResultsView = ({albums, artists, topResult, user}) => {
+const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
 	return (
 		<div>
 			{artists.length == 0 ?
@@ -30,6 +30,7 @@ const ResultsView = ({albums, artists, topResult, user}) => {
 					<NavLink
 						to={`/album/${topResult.id}`}
 						key={topResult.id}
+						onClick={() => setAlbum(topResult)}
 						className="gallery__item gallery_top__topresult"
 					>
 						<div className="gallery__item__wrapper">
@@ -91,6 +92,7 @@ const ResultsView = ({albums, artists, topResult, user}) => {
 					{albums.slice(0, 8).map(album => (
 						<NavLink
 							to={`/album/${album.id}`}
+							onClick={() => setAlbum(album)}
 							key={album.id}
 							className="gallery__item"
 						>
