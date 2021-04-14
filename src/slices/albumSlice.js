@@ -4,13 +4,14 @@ import { get } from '../utils/api';
 const { REACT_APP_BASE_URL } = process.env;
 
 const initialState = {
+    id: undefined,
     name: undefined,
     artists: [],
     tracks: [],
     totalTracks: undefined,
     images: [],
     released: undefined,
-    runningTime: undefined,
+    runningTime_ms: undefined,
     popularity: undefined
 }
 
@@ -18,6 +19,9 @@ const albumSlice = createSlice({
     name: 'album',
     initialState,
     reducers: {
+        setId: (state, action) => {
+            state.id = action.payload;
+        },
         setName: (state, action) => {
             state.name = action.payload;
         },
@@ -37,7 +41,7 @@ const albumSlice = createSlice({
             state.released = action.payload;
         },
         setRunningTime: (state, action) => {
-            state.runningTime = action.payload;
+            state.runningTime_ms = action.payload;
         },
         setPopularity: (state, action) => {
             state.popularity = action.payload;
@@ -45,7 +49,8 @@ const albumSlice = createSlice({
     }
 });
 
-export const { 
+export const {
+    setId, 
     setName, 
     setArtists, 
     setTracks, 
@@ -87,6 +92,8 @@ export const fetchAlbum = (id) => {
             const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
             const artists = fixArtists(album.artists) 
             const trackFix = fixTracks(album.tracks.items) 
+            console.log(album)
+            dispatch(setId(id))
             dispatch(setName(album.name))           
             dispatch(setArtists(artists))
             dispatch(setTracks(trackFix[0]))
