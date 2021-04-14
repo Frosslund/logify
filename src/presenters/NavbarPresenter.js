@@ -1,14 +1,14 @@
 import { initiateSearch, clearSearch } from "../slices/searchSlice";
-import ResultsView from "./ResultsView"
+import Navbar from "../views/Navbar";
 import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
+/* const mapStateToProps = (state) => {
     return {
         albums: state.search.albums,
         artists: state.search.artists,
         topResult: state.search.topResult
     };
-}
+} */
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-const resultsPresenter = connect(mapStateToProps, mapDispatchToProps)(ResultsView)
+const NavbarPresenter = connect(null, mapDispatchToProps)(Navbar)
 
-export default resultsPresenter;
+export default NavbarPresenter;
     
