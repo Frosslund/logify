@@ -5,6 +5,7 @@ import RedirectPage from '../utils/RedirectPage';
 import LogView from './LogView';
 
 import AlbumPresenter from '../presenters/AlbumPresenter';
+import LogPresenter from '../presenters/LogPresenter';
 
 
 
@@ -14,7 +15,7 @@ const Router = () => {
 			<Redirect exact from="/" to="/home" />
 			<Route exact path="/home" component={HomeView} />
 			<Route exact path="/redirect" component={RedirectPage} />
-			<Route exact path="/log" component={LogView} />
+			<Route exact path="/log" component={LogPresenter} />
 			<Route path="/album/:id" component={AlbumPresenter} />
 		</Switch>
 
