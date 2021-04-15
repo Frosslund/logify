@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
         albums: state.search.albums,
         artists: state.search.artists,
         topResult: state.search.topResult,
-        user: state.userData.name
+        user: state.user.userName
     };
 }
 

@@ -27,7 +27,7 @@ const userDataSlice = createSlice({
             state.name = action.payload.name;
             state.lists = action.payload.lists;
             state.wishlist = action.payload.wishlist;
-            state.logs = action.payload.logs;
+            state.log = action.payload.logs;
         }
     }
 });
