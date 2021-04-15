@@ -49,6 +49,7 @@ export const checkUser = async (user) => {
 
 export const updateFirestoreState = async (payload) => {
     try {
+        //console.log('updateFirestoreState', payload)
         const data = await get(REACT_APP_BASE_URL + '/me')
         let docRef = db.collection('users').doc(data.id)
         return docRef.update(payload)

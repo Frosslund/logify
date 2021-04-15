@@ -3,12 +3,12 @@ const LogView = (props) => {
 	const {
 		logs
 	} = props;
-
+	
 	return (
-		<div class="LogView">
+		<div class="logView">
 			<table class="logTable">
 				<thead>
-					<tr>
+					<tr class="firstRow">
 						<th>Date</th>
 						<th>Album</th>
 						<th>Year</th>
@@ -17,9 +17,8 @@ const LogView = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					{logs.map(log => {
+					{logs.slice(0).reverse().map(log => {
 						return (
-							
 							<tr>
 								<td>{log.dateAdded}</td>
 								<td>{log.album.name}</td>

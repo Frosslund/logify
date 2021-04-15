@@ -92,7 +92,6 @@ export const fetchAlbum = (album) => {
             //const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
             const artists = fixArtists(album.artists) 
             const trackFix = fixTracks(album.tracks.items) 
-            console.log(album)
             dispatch(setId(album.id))
             dispatch(setName(album.name))           
             dispatch(setArtists(artists))

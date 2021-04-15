@@ -12,7 +12,7 @@ import albumReducer from './slices/albumSlice';
 const store = configureStore({
     reducer: {
         user: userReducer,
-        userData: userDataReducer,
+        //userData: userDataReducer,
         log: logReducer,
         search: searchReducer,
         album: albumReducer

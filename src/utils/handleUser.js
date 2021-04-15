@@ -4,6 +4,7 @@ import { get } from './api';
 import { fetchUser } from '../slices/userSlice';
 import { db } from './firebaseConfig';
 import { syncUser } from '../slices/userDataSlice';
+import { syncLog } from '../slices/logSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -13,11 +14,12 @@ export const HandleUser = () => {
     const getUserInfo = async () => {
         try {
             const user = await get(REACT_APP_BASE_URL + '/me');
-            //dispatch(fetchUser(data));
+            dispatch(fetchUser(user));
             let docRef = db.collection('users').doc(user.id);
             let doc = await docRef.get();
             if (doc.exists) {
-                dispatch(syncUser(doc.data()));
+                // add syncList, syncWishlist when ready
+                dispatch(syncLog(doc.data()));
             } else {
                 setUser(user)
             }

@@ -1,8 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { get } from '../utils/api';
-import { checkUser } from '../utils/firebaseConfig';
-
-const { REACT_APP_BASE_URL } = process.env;
 
 const initialState = {
     loggedIn: false,
@@ -32,15 +28,12 @@ export const userSelector = state => state.user
 
 export default userSlice.reducer
 
-export const fetchUser = (data) => {
+export const fetchUser = (user) => {
     return dispatch => {
         try {
-            //const data = await get(REACT_APP_BASE_URL + '/me');
-            //console.log(data)
-            dispatch(setUserName(data.display_name ? data.display_name : data.id))
-            dispatch(setUserId(data.id))
+            dispatch(setUserName(user.display_name ? user.display_name : user.id))
+            dispatch(setUserId(user.id))
             dispatch(setLoggedIn(true))
-            //checkUser(data)
         } catch (err) {
             console.log(err)
         }

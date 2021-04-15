@@ -4,20 +4,22 @@ import { addToLog } from "../slices/logSlice";
 
 const mapStateToProps = (state) => {
     return {
+        id: state.album.id,
         name: state.album.name,
         artists: state.album.artists,
         tracks: state.album.tracks,
         totalTracks: state.album.totalTracks,
         images: state.album.images,
         released: state.album.released,
-        runningTime: state.album.runningTime_ms,
+        runningTime_ms: state.album.runningTime_ms,
         popularity: state.album.popularity
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddToLog: (res) => dispatch(addToLog({...res, id: Date(), dateAdded: Date()}))
+        onAddToLog: (res) => {dispatch(addToLog(res));}
+        //onAddToLog: (res) => dispatch(addToLog({...res, id: Date.now(), dateAdded: Date.toString()}))
     };
 }
 

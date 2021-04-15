@@ -4,7 +4,7 @@ import _ from 'lodash';
 const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
 	return (
 		<div>
-			{artists.length == 0 ?
+			{artists.length === 0 ?
 			<div className="no_search_text">
 				{localStorage.loggedIn ? 
 				<div>
