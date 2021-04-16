@@ -36,9 +36,11 @@ export const initiateSearch = (searchTerm) => {
             const API_URL = REACT_APP_BASE_URL + `/search?query=${encodeURIComponent(searchTerm)}&type=album,artist&limit=50`
             const searchData = await get(API_URL)
             const artistData = searchData.artists.items.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1).slice(0, 20)
-            const albumsData = searchData.albums.items.filter(item => item.album_type != "single")
+            const albumsData = searchData.albums.items.filter(item => item.album_type !== "single")
             let albumIds = albumsData.map(album => album.id)
-            albumIds.length > 20 ? albumIds = albumIds.slice(0, 20) : albumIds = albumIds
+            if (albumIds.length > 20) {
+                albumIds = albumIds.slice(0, 20)
+            }
             const data = await get(REACT_APP_BASE_URL + `/albums?ids=${albumIds.toString()}`)
             const sortedAlbums = data.albums.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
             //console.log(artistData[0])

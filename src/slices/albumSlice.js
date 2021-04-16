@@ -1,7 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { get } from '../utils/api';
-
-const { REACT_APP_BASE_URL } = process.env;
 
 const initialState = {
     id: undefined,
