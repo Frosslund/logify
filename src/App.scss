@@ -397,11 +397,12 @@ li {
 
 .albumView {
   margin: auto;
-  width: 60%;
+  width: 70%;
   padding: 20px;
   color: $color-light;
   text-transform: uppercase;
   text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
+  font-size: smaller;
 
   h1 {
     font-weight: bolder;
@@ -446,21 +447,21 @@ li {
       }
 
       .normal {
-        padding-bottom: 2rem;
+        padding-bottom: 1.5rem;
       }
 
       .trackTable {
         font-weight: normal;
         //font-size: xx-large;
         text-align: left;
-        font-size: 0.9rem;
+        font-size: 0.65rem;
 
         .firstRow {
           color: rgba($color-green, 0.9);
         }
       }
       .clock {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
 
       .trackTable tr {
@@ -502,15 +503,15 @@ li {
 }
 
 .logView {
-  max-width: 70%;
+  max-width: 80%;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
-
   padding: 20px;
   color: $color-light;
   text-transform: uppercase;
   text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
+  font-size: smaller;
 
   h1 {
     font-weight: bolder;
@@ -532,9 +533,9 @@ li {
     padding: 20px;
 
     font-weight: normal;
-    //font-size: xx-large;
+
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 0.65rem;
     .firstRow {
       color: rgba($color-green, 0.9);
     }
