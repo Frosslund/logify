@@ -19,11 +19,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 export const db = firebase.firestore();
 
-/* const logUsers = async () => {
-    let usersRef = db.collection('users')
-    let users = await usersRef.get();
-    console.log(users);
-} */
 
 const setUser = async (user) => {
     let usersRef = db.collection('users')
