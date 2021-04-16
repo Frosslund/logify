@@ -1,29 +1,8 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { handleLogin } from '../utils/handleLogin';
+import { handleLogin, handleLogout } from '../utils/handleLogin';
 
-/* const Navbar = () => {
-	const dispatch = useDispatch();
-
-	return (
-		<header>
-			<Link to='/home'>
-				<h1>Logify</h1>
-			</Link>
-			<Link to='/log'>
-				<Button color='red' text='Log'/>
-			</Link>
-			<Link to="album/0ETFjACtuP2ADo6LFhL6HN">
-				<Button color='red' text='Albumtest' onClick={dispatch(fetchAlbum('0ETFjACtuP2ADo6LFhL6HN'))} />
-			</Link>
-			<Button color='red' text='Lists'/>
-			<Button color='red' text='Profile'/>
-			<Button color='red' text='Login' type="submit" onClick={handleLogin} />
-		</header>
-	);
-} */
-
-const Navbar = ({ doSearch, clearSearch }) => {
+const Navbar = ({ doSearch, clearSearch, loggedInUser, logOutUser }) => {
 
 	const [searchTerm, setSearchTerm] = useState("")
 
@@ -35,18 +14,25 @@ const Navbar = ({ doSearch, clearSearch }) => {
 		doSearch(term)
     };
 
+	const handleUserLogout = () => {
+		logOutUser();
+		handleLogout();
+	}
+
     return (
 		<header className="navbar">
 			<NavLink to="/home" className="navbar__logo">
 				<span>Logify &#9998;</span>
 			</NavLink>
 			<div className="navbar__search__container">
+				<NavLink to="/home">
 				<input className="navbar__search__input"
 					type="text"
 					onChange={e => handleSearchInput(e.target.value)}
 					placeholder="Search..."
 					value={searchTerm}
 				/>
+				</NavLink>
 			</div>
 			<nav>
 				<ul className="navbar__links">
@@ -61,7 +47,7 @@ const Navbar = ({ doSearch, clearSearch }) => {
 						</NavLink>
 					</li>
 					<li className="navbar__item">
-						<NavLink to="#" className="navbar__link" onClick={handleLogin}>
+						<NavLink to={localStorage.loggedIn || loggedInUser ? "/home" : "#"} className="navbar__link" onClick={localStorage.loggedIn || loggedInUser ? handleUserLogout : handleLogin}>
 							{localStorage.loggedIn ?
 							<span>Logout</span> 
 							:

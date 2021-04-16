@@ -1,23 +1,23 @@
 import { initiateSearch, clearSearch } from "../slices/searchSlice";
+import { setLoggedIn } from "../slices/userSlice";
 import Navbar from "../views/Navbar";
 import { connect } from "react-redux";
 
-/* const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
     return {
-        albums: state.search.albums,
-        artists: state.search.artists,
-        topResult: state.search.topResult
+        loggedInUser: state.user.loggedIn
     };
-} */
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
         doSearch: x => dispatch(initiateSearch(x)),
-        clearSearch: () => dispatch(clearSearch())
+        clearSearch: () => dispatch(clearSearch()),
+        logOutUser: () => dispatch(setLoggedIn(false))
     };
 }
 
-const NavbarPresenter = connect(null, mapDispatchToProps)(Navbar)
+const NavbarPresenter = connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
 export default NavbarPresenter;
     
