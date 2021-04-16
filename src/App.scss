@@ -110,16 +110,16 @@ li {
 
   &__logo {
     cursor: pointer;
-    font-size: 50px;
+    font-size: 40px;
     color: $color-light;
     list-style: none;
     text-decoration: none;
-    //text-shadow: 0 0 4rem $color-light, 0.1rem 0.1rem 0.5rem $color-dark;
+    //text-shadow: 0 0 10rem $color-light, 0.1rem 0.1rem 0.5rem $color-dark;
   }
 
   &__links {
     list-style: none;
-    //text-shadow: 0 0 4rem $color-light, 0.1rem 0.1rem 0.5rem $color-dark;
+    //text-shadow: 0 0 10rem $color-light, 0.1rem 0.1rem 0.5rem $color-dark;
   }
 
   &__item {
@@ -174,7 +174,7 @@ li {
 
   &__header {
     display: grid;
-    text-shadow: 0.1rem 0.1rem 0.1rem $color-dark, 0 0 4rem $color-dark;
+    text-shadow: 0.1rem 0.1rem 0.3rem $color-dark, 0 0 4rem $color-dark;
     grid-template-columns: max-content;
     padding: 0rem 7%;
     padding-top: 2.5rem;
@@ -198,7 +198,8 @@ li {
     cursor: pointer;
 
     background-color: rgba($color-dark, 0.5);
-    box-shadow: 0 0 1rem rgba(black, 0.3), 0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+    box-shadow: 0 0 10rem rgba(black, 0.3),
+      0.1rem 0.2rem 0.5rem rgba(black, 0.5);
 
     border-radius: 0.1rem;
 
@@ -356,7 +357,8 @@ li {
 
   &__topresult {
     background-color: rgba($color-green, 0.4);
-    box-shadow: 0 0 1rem rgba(black, 0.3), 0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+    box-shadow: 0 0 10rem rgba(black, 0.3),
+      0.1rem 0.2rem 0.5rem rgba(black, 0.5);
 
     border-radius: 0.4rem;
 
@@ -381,7 +383,7 @@ li {
   margin-top: 8rem;
   text-align: center;
   font-size: 5rem;
-  text-shadow: 0 0 1rem rgba($color-dark, 0.3),
+  text-shadow: 0 0 3rem rgba($color-dark, 0.3),
     0.1rem 0.2rem 0.5rem rgba($color-dark, 0.5);
 
   &__username {
@@ -397,10 +399,13 @@ li {
   margin: auto;
   width: 60%;
   padding: 20px;
-  color: #fff;
+  color: $color-light;
+  text-transform: uppercase;
+  text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
 
   h1 {
     font-weight: bolder;
+    color: $color-light;
   }
 
   h3 {
@@ -434,7 +439,7 @@ li {
     .title {
       display: inline;
       padding-left: 20px;
-      text-shadow: -10px 10px 50px rgb(77, 77, 77);
+      //text-shadow: -10px 10px 50px rgb(77, 77, 77);
 
       .tighter {
         padding-bottom: 0.8rem;
@@ -449,9 +454,13 @@ li {
         //font-size: xx-large;
         text-align: left;
         font-size: 0.9rem;
+
         .firstRow {
-          color: rgba($color-green, 0.75);
+          color: rgba($color-green, 0.9);
         }
+      }
+      .clock {
+        font-size: 1.2rem;
       }
 
       .trackTable tr {
@@ -471,10 +480,9 @@ li {
     background-color: rgba($color-dark, 0.5);
     box-shadow: 0 0 10rem rgba(black, 0.3),
       0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+    color: $color-light;
     border-radius: 0.4rem;
-
     border: none;
-    color: white;
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
@@ -484,19 +492,25 @@ li {
     cursor: pointer;
   }
 
-  .toLogButton:hover {
-    background-color: rgba($color-green, 0.4);
+  .toLogButton:hover,
+  .toLogButton:focus {
+    transition: all 0.3s ease 0s;
+    background-color: rgba($color-green, 0.7);
+    transform: scale(1.04);
+    outline: none;
   }
 }
 
 .logView {
-  max-width: 60%;
+  max-width: 70%;
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
 
   padding: 20px;
-  color: #fff;
+  color: $color-light;
+  text-transform: uppercase;
+  text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
 
   h1 {
     font-weight: bolder;
@@ -522,7 +536,7 @@ li {
     text-align: left;
     font-size: 0.9rem;
     .firstRow {
-      color: rgba($color-green, 0.75);
+      color: rgba($color-green, 0.9);
     }
   }
 
