@@ -14,3 +14,7 @@ export const handleLogin = () => {
 			response_type=token&show_dialog=true`
 	);
 }
+
+export const handleLogout = () => {
+	localStorage.clear();
+}
