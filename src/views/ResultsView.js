@@ -25,7 +25,7 @@ const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
 			:
 			<div>
 				<h2 className="gallery__header">Top Result:</h2>
-				{topResult.type == "album" ?
+				{topResult.type === "album" ?
 				<div className="gallery gallery_top">
 					<NavLink
 						to={`/album/${topResult.id}`}

@@ -1,7 +1,6 @@
 import _ from 'lodash';
 
 import { getParamValues } from './getParamValues';
-import { fetchUser } from '../slices/userSlice';
 import { HandleUser } from './handleUser';
 
 const RedirectPage = ({ history, location }) => {

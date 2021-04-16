@@ -1,8 +1,6 @@
 import { Route, Switch, Redirect } from 'react-router-dom';
 
-import HomeView from './HomeView';
 import RedirectPage from '../utils/RedirectPage';
-import LogView from './LogView';
 
 import AlbumPresenter from '../presenters/AlbumPresenter';
 import ResultsPresenter from '../presenters/ResultsPresenter';

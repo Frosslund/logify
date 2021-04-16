@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
-import Button from './components/Button';
+import { NavLink } from 'react-router-dom';
 import { handleLogin } from '../utils/handleLogin';
-import { fetchAlbum } from '../slices/albumSlice';
 
 /* const Navbar = () => {
 	const dispatch = useDispatch();
@@ -32,7 +29,7 @@ const Navbar = ({ doSearch, clearSearch }) => {
 
 	const handleSearchInput = (term) => {
 		setSearchTerm(term)
-		term == "" ?
+		term === "" ?
 		clearSearch()
 		:
 		doSearch(term)

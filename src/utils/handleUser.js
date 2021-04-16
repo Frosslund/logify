@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { get } from './api';
 import { fetchUser } from '../slices/userSlice';
 import { db } from './firebaseConfig';
-import { syncUser } from '../slices/userDataSlice';
 import { syncLog } from '../slices/logSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
