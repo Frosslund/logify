@@ -41,7 +41,7 @@ const Navbar = ({ doSearch, clearSearch }) => {
     return (
 		<header className="navbar">
 			<NavLink to="/home" className="navbar__logo">
-				Logify
+				<span>Logify &#9998;</span>
 			</NavLink>
 			<div className="navbar__search__container">
 				<input className="navbar__search__input"
