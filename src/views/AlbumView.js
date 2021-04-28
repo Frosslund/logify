@@ -102,7 +102,7 @@ const AlbumView = (props) => {
 				nested
 			>
 				{close => (
-					<AddToLogView name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+					<AddToLogView album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
 				)}
 			</Popup>
 			<Popup
