@@ -1,3 +1,5 @@
+import Popup from 'reactjs-popup';
+import AddToLogView from "./AddToLogView";
 
 const AlbumView = (props) => {
 	
@@ -90,20 +92,31 @@ const AlbumView = (props) => {
 						)}
 					</table>
 				</div>
-				<button  class="toLogButton" onClick={() => onAddToLog({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
-					LOG ALBUM
-				</button>
-				<button class="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
-					LISTEN LATER
-				</button>	
-				<button class="toLogButton">
-					ADD TO LIST
-				</button>
-				<a class="toLogButton" href={externalUrl} target="_blank" rel="noreferrer noopener">
-					CONTINUE TO SPOTIFY
-				</a>
 			</div>
-			
+			<button className="toLogButton" onClick={() => onAddToLog({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
+					ADD TO LOG &#10004;
+			</button>
+			<Popup
+				trigger={<button class="toLogButton"> ADD TO LOG NOT WORKING &#10004;</button>}
+				modal
+				nested
+			>
+				{close => (
+					<AddToLogView name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+				)}
+			</Popup>
+			<Popup
+				trigger={<button class="toLogButton"> ADD TO LIST NOT WORKING &#10004;</button>}
+				modal
+				nested
+			>
+				{close => (
+					<AddToLogView name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+				)}
+			</Popup>
+      <button class="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
+        LISTEN LATER
+      </button>	
 		</div>
 		
 	)

@@ -612,3 +612,131 @@ li {
     padding-bottom: 1.7rem;
   }
 }
+
+/* Popup Styling */
+
+.popup {
+    color: $color-light;
+    background-color: $color-light-dark;
+    box-shadow: 0 0 10rem rgba($color-dark, 0.3),
+        0.1rem 0.2rem 0.5rem rgba($color-dark, 0.5);
+    border-radius: 0.4rem;
+    padding: 2rem;
+    display: flex;
+    text-transform: uppercase;
+
+    &__image {
+        display: inline;
+        width: 25%;
+        height: fit-content;
+        box-shadow: 0.5rem 0.5rem 3rem rgba($color-dark, 0.5),
+            -0.2rem -0.2rem 3rem rgba($color-dark, 0.5);
+    }
+
+    &__content {
+        display: inline;
+        padding-left: 1rem;
+
+        span {
+            font-weight: 100;
+            opacity: 0.9;
+        }
+
+        p {
+            font-weight: 200;
+        }
+
+        h4 {
+            font-weight: 300;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            text-decoration: underline;
+        }
+
+        textarea {
+            margin-top: 2rem;
+            box-shadow: 0.5rem 0.5rem 3rem rgba($color-dark, 0.5),
+                -0.2rem -0.2rem 3rem rgba($color-dark, 0.5);
+            resize: none;
+            font-family: "Circular", Helvetica, sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+    }
+
+    &__close {
+        cursor: pointer;
+        position: absolute;
+        display: block;
+        padding: 2px 5px;
+        line-height: 20px;
+        right: 1rem;
+        top: 1rem;
+        font-size: 30px;
+        color: rgba($color-light, 0.5);
+        background: transparent;
+    }
+
+    &__close:hover {
+        color: rgba($color-light, 0.9);
+        transition: all 0.7s ease 0s;
+    }
+}
+
+.saveButton {
+    display: inline;
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    background-color: rgba($color-dark, 0.5);
+    box-shadow: 0 0 10rem rgba(black, 0.3),
+        0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+    color: $color-light;
+    border-radius: 0.4rem;
+    border: none;
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.saveButton:hover,
+.saveButton:focus {
+    transition: all 0.3s ease 0s;
+    background-color: rgba($color-green, 0.7);
+    transform: scale(1.04);
+    outline: none;
+}
+
+@keyframes anvil {
+    0% {
+        transform: scale(1) translateY(0px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba($color-dark, 0);
+    }
+    1% {
+        transform: scale(1) translateY(-50px);
+        opacity: 0;
+        box-shadow: 0 0 0 rgba($color-dark, 0);
+    }
+    100% {
+        transform: scale(1) translateY(0px);
+        opacity: 1;
+        box-shadow: 0 0 500px rgba($color-dark, 0);
+    }
+}
+.popup-content {
+    animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+    width: 60%;
+}
+
+.popup-overlay {
+    background: rgba($color-dark, 0.8);
+    animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) both;
+}
+[data-popup="tooltip"].popup-overlay {
+    background: transparent;
+}
