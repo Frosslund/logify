@@ -1,6 +1,7 @@
 import AlbumView from "../views/AlbumView"
 import { connect } from "react-redux";
 import { addToLog } from "../slices/logSlice";
+import { addToWish } from "../slices/listSlice";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,14 +13,15 @@ const mapStateToProps = (state) => {
         images: state.album.images,
         released: state.album.released,
         runningTime_ms: state.album.runningTime_ms,
-        popularity: state.album.popularity
+        popularity: state.album.popularity,
+        externalUrl: state.album.externalUrl
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAddToLog: (res) => {dispatch(addToLog(res));}
-        //onAddToLog: (res) => dispatch(addToLog({...res, id: Date.now(), dateAdded: Date.toString()}))
+        onAddToLog: (res) => {dispatch(addToLog(res));},
+        onAddToWish: (res) => {dispatch(addToWish(res));}
     };
 }
 
