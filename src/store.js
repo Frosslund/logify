@@ -4,18 +4,17 @@ import { reduxBatch } from '@manaflair/redux-batch';
 
 import userReducer from './slices/userSlice';
 import logReducer from './slices/logSlice';
-import userDataReducer from './slices/userDataSlice';
 import searchReducer from './slices/searchSlice';
-//import firebase from './utils/firebaseConfig';
 import albumReducer from './slices/albumSlice';
+import listReducer from './slices/listSlice';
 
 const store = configureStore({
     reducer: {
         user: userReducer,
-        //userData: userDataReducer,
         log: logReducer,
         search: searchReducer,
-        album: albumReducer
+        album: albumReducer,
+        list: listReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production',

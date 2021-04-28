@@ -397,7 +397,7 @@ li {
 
 .albumView {
   margin: auto;
-  width: 70%;
+  width: 75%;
   padding: 20px;
   color: $color-light;
   text-transform: uppercase;
@@ -417,30 +417,37 @@ li {
     font-weight: normal;
   }
 
+  a:link {
+    text-decoration: none;
+  }
+
   .top {
-    //background-color: rgba($color-green, 0.4);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    height: 520px;
     background-color: rgba($color-dark, 0.5);
     box-shadow: 0 0 10rem rgba(black, 0.3),
       0.1rem 0.2rem 0.5rem rgba(black, 0.5);
     border-radius: 0.4rem;
-    display: flex;
-    padding: 20px;
 
     .image {
-      display: inline;
+      box-sizing: border-box;
       width: 50%;
-      height: fit-content;
+      height: min-content;
+      //border-radius: 0.4rem;
+      //border-radius: 2px 10px 2px;
+      //border-radius: 50%;
       box-shadow: 0.5rem 0.5rem 3rem rgba($color-dark, 0.1),
         -0.2rem -0.2rem 3rem rgba($color-dark, 0.1);
-      //margin-bottom: -0.5rem;
-      //margin-top: 1rem;
-      //margin-left: 1rem;
     }
 
     .title {
-      display: inline;
+      box-sizing: border-box;
+      width: 50%;
       padding-left: 20px;
-      //text-shadow: -10px 10px 50px rgb(77, 77, 77);
+      height: 440px;
+      overflow: scroll;
 
       .tighter {
         padding-bottom: 0.8rem;
@@ -448,56 +455,81 @@ li {
 
       .normal {
         padding-bottom: 1.5rem;
+        text-transform: none;
       }
 
       .trackTable {
         font-weight: normal;
-        //font-size: xx-large;
-        text-align: left;
+        text-align: right;
         font-size: 0.65rem;
+        border-collapse: separate;
+        width: 400px;
 
         .firstRow {
-          color: rgba($color-green, 0.9);
+          color: rgba($color-green, 0.7);
         }
       }
+
       .clock {
         font-size: 1.1rem;
       }
 
       .trackTable tr {
         font-weight: lighter;
-        padding-right: 4rem;
+        padding-right: 1rem;
         text-align: left;
       }
 
       .trackTable td {
-        padding-right: 2rem;
+        padding-right: 1rem;
         padding-bottom: 0.1rem;
-        text-align: left;
+        //text-align: left;
+      }
+
+      .number {
+        text-align: right;
+      }
+
+      .playButton {
+        color: $color-light;
+        text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
+        font-weight: 400;
+        font-size: 0.6rem;
+        background: none;
+        border: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+      }
+      .playButton:hover,
+      .playButton:focus {
+        transition: all 0.3s ease 0s;
+        color: rgba($color-green, 0.9);
+        outline: none;
       }
     }
   }
   .toLogButton {
-    background-color: rgba($color-dark, 0.5);
-    box-shadow: 0 0 10rem rgba(black, 0.3),
-      0.1rem 0.2rem 0.5rem rgba(black, 0.5);
-    color: $color-light;
+    box-sizing: border-box;
+    width: 24%;
+    height: fit-content;
+    background-color: rgba($color-dark, 0.4);
+    color: rgba($color-light, 0.9);
+    text-shadow: 0.1rem 0.1rem 0.2rem $color-dark, 0 0 2rem $color-dark;
     border-radius: 0.4rem;
     border: none;
-    padding: 15px 32px;
+    padding: 6px 0px;
     text-align: center;
-    display: inline-block;
-    font-weight: bold;
-    //text-shadow: -10px 10px 200px rgb(0, 0, 0);
-    margin: 6px 0px;
+    font-weight: lighter;
+    margin: auto;
     cursor: pointer;
   }
 
   .toLogButton:hover,
   .toLogButton:focus {
     transition: all 0.3s ease 0s;
-    background-color: rgba($color-green, 0.7);
-    transform: scale(1.04);
+    background-color: rgba($color-green, 0.5);
+    transform: scale(1.01);
     outline: none;
   }
 }
@@ -531,6 +563,7 @@ li {
       0.1rem 0.2rem 0.5rem rgba(black, 0.5);
     border-radius: 0.4rem;
     padding: 20px;
+    border-bottom: 2px solid $color-green;
 
     font-weight: normal;
 
@@ -551,5 +584,31 @@ li {
     padding-bottom: 0.1rem;
     padding-right: 6rem;
     text-align: left;
+    border-bottom: 0.5px solid $color-green;
+  }
+}
+
+.userInfo {
+  margin: auto;
+  width: 500px;
+  padding: 20px;
+  display: flex;
+  //flex-wrap: wrap;
+
+  img {
+    width: 30%;
+    height: fit-content;
+    border-radius: 50%;
+    box-shadow: 0 0 10rem rgba(black, 0.3),
+      0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+  }
+
+  .info {
+    h5 {
+      color: rgba($color-green, 0.9);
+    }
+    padding: 10%;
+    padding-left: 6%;
+    padding-bottom: 1.7rem;
   }
 }

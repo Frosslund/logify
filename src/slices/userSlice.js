@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     loggedIn: false,
     userName: '',
-    userId: ''
+    userId: '',
+    userImageURL: []
 }
 
 const userSlice = createSlice({
@@ -18,11 +19,14 @@ const userSlice = createSlice({
         },
         setUserId: (state, action) => {
             state.userId = action.payload
+        },
+        setUserImageURL: (state, action) => {
+            state.userImageURL = action.payload
         }
     }
 });
 
-export const { setLoggedIn, setUserName, setUserId } = userSlice.actions;
+export const { setLoggedIn, setUserName, setUserId, setUserImageURL } = userSlice.actions;
 
 export const userSelector = state => state.user 
 
@@ -33,6 +37,7 @@ export const fetchUser = (user) => {
         try {
             dispatch(setUserName(user.display_name ? user.display_name : user.id))
             dispatch(setUserId(user.id))
+            dispatch(setUserImageURL(user.images[0].url))
             dispatch(setLoggedIn(true))
         } catch (err) {
             console.log(err)

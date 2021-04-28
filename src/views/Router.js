@@ -2,11 +2,11 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 import HomeView from './HomeView';
 import RedirectPage from '../utils/RedirectPage';
-import LogView from './LogView';
 
 import AlbumPresenter from '../presenters/AlbumPresenter';
 import ResultsPresenter from '../presenters/ResultsPresenter';
 import LogPresenter from '../presenters/LogPresenter';
+import ListPresenter from '../presenters/ListPresenter';
 
 
 
@@ -18,6 +18,7 @@ const Router = () => {
 			<Route exact path="/home" component={ResultsPresenter} />
 			<Route exact path="/redirect" component={RedirectPage} />
 			<Route exact path="/log" component={LogPresenter} />
+			<Route exact path="/lists" component={ListPresenter} />
 			<Route path="/album/:id" component={AlbumPresenter} />
 		</Switch>
 

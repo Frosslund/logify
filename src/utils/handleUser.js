@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import { get } from './api';
 import { fetchUser } from '../slices/userSlice';
 import { db } from './firebaseConfig';
-import { syncUser } from '../slices/userDataSlice';
 import { syncLog } from '../slices/logSlice';
+import { syncLists } from '../slices/listSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -20,6 +20,7 @@ export const HandleUser = () => {
             if (doc.exists) {
                 // add syncList, syncWishlist when ready
                 dispatch(syncLog(doc.data()));
+                dispatch(syncLists(doc.data()));
             } else {
                 setUser(user)
             }

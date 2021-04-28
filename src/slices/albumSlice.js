@@ -12,7 +12,8 @@ const initialState = {
     images: [],
     released: undefined,
     runningTime_ms: undefined,
-    popularity: undefined
+    popularity: undefined,
+    externalUrl: undefined
 }
 
 const albumSlice = createSlice({
@@ -45,6 +46,9 @@ const albumSlice = createSlice({
         },
         setPopularity: (state, action) => {
             state.popularity = action.payload;
+        },
+        setExternalUrl: (state, action) => {
+            state.externalUrl = action.payload;
         }
     }
 });
@@ -58,7 +62,8 @@ export const {
     setImages, 
     setReleased, 
     setRunningTime,
-    setPopularity
+    setPopularity,
+    setExternalUrl
 } = albumSlice.actions;
 
 export const albumSelector = state => state.album 
@@ -80,7 +85,9 @@ export const fetchAlbum = (album) => {
             tracks.push({
                 name: item.name,  
                 track_number: item.track_number, 
-                duration_ms: item.duration_ms
+                duration_ms: item.duration_ms,
+                preview_url: item.preview_url,
+                id: item.id
             });
             totTime = totTime + item.duration_ms;
         });
@@ -101,6 +108,7 @@ export const fetchAlbum = (album) => {
             dispatch(setImages(album.images))
             dispatch(setReleased(album.release_date.split("-", 1).pop()))
             dispatch(setPopularity(album.popularity))
+            dispatch(setExternalUrl(album.external_urls.spotify))
         } catch (err) {
             console.log(err)
         }
