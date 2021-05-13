@@ -94,18 +94,30 @@ export const fetchAlbum = (album) => {
     return async dispatch => {
         try {
             //const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
-            const artists = fixArtists(album.artists) 
-            const trackFix = fixTracks(album.tracks.items) 
+
+            //FULLÖSNING DELUXE HAHA! MEN FUNKAR, KAN KOLLA PÅ HUR MAN GÖR DET SNYGGARE SEN...
+            if (Object.keys(album).length !== 9) {
+                const artists = fixArtists(album.artists) 
+                const trackFix = fixTracks(album.tracks.items)
+                dispatch(setTracks(trackFix[0]))
+                dispatch(setRunningTime(trackFix[1]))
+                dispatch(setArtists(artists))
+                dispatch(setReleased(album.release_date.split("-", 1).pop()))
+                dispatch(setExternalUrl(album.external_urls.spotify))
+                dispatch(setTotTracks(album.total_tracks))
+            } else {
+                dispatch(setTracks(album.tracks))
+                dispatch(setRunningTime(album.runningTime_ms))
+                dispatch(setArtists(album.artists))
+                dispatch(setReleased(album.released))
+                dispatch(setExternalUrl(album.externalUrl))
+                dispatch(setTotTracks(album.totalTracks))
+            }
             dispatch(setId(album.id))
             dispatch(setName(album.name))           
-            dispatch(setArtists(artists))
-            dispatch(setTracks(trackFix[0]))
-            dispatch(setRunningTime(trackFix[1]))
-            dispatch(setTotTracks(album.total_tracks))
             dispatch(setImages(album.images))
-            dispatch(setReleased(album.release_date.split("-", 1).pop()))
             dispatch(setPopularity(album.popularity))
-            dispatch(setExternalUrl(album.external_urls.spotify))
+            
         } catch (err) {
             console.log(err)
         }
