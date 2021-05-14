@@ -6,6 +6,7 @@ import AlbumPresenter from '../presenters/AlbumPresenter';
 import ResultsPresenter from '../presenters/ResultsPresenter';
 import LogPresenter from '../presenters/LogPresenter';
 import ListPresenter from '../presenters/ListPresenter';
+import SingleListPresenter from '../presenters/SingleListPresenter';
 
 
 
@@ -19,6 +20,7 @@ const Router = () => {
 			<Route exact path="/log" component={LogPresenter} />
 			<Route exact path="/lists" component={ListPresenter} />
 			<Route path="/album/:id" component={AlbumPresenter} />
+			<Route path="/lists/:name" component={SingleListPresenter} />
 		</Switch>
 
 			
