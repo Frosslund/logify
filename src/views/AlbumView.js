@@ -1,5 +1,6 @@
 import Popup from 'reactjs-popup';
-import AddToLogView from "./AddToLogView";
+import AddToLogComponent from "./components/AddToLogComponent";
+import AddToListComponent from "./components/AddToListComponent";
 
 const AlbumView = (props) => {
 	
@@ -14,8 +15,10 @@ const AlbumView = (props) => {
 		runningTime_ms,
 		popularity,
 		externalUrl,
+		lists,
 		onAddToLog,
-		onAddToWish
+		onAddToWish,
+		onAddToList
 	} = props;
 
 	console.log(externalUrl)
@@ -102,7 +105,7 @@ const AlbumView = (props) => {
 				nested
 			>
 				{close => (
-					<AddToLogView album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+					<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
 				)}
 			</Popup>
 			<Popup
@@ -111,10 +114,20 @@ const AlbumView = (props) => {
 				nested
 			>
 				{close => (
-					<AddToLogView name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+					<AddToListComponent 
+						album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} 
+						name={name} 
+						images={images} 
+						released={released} 
+						artists={artists} 
+						close={close} 
+						lists={lists}
+						onAddToWish={onAddToWish}
+						onAddToList={onAddToList} 
+					/>
 				)}
 			</Popup>
-      <button class="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
+      <button className="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
         LISTEN LATER
       </button>	
 		</div>
