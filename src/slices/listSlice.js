@@ -1,9 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateFirestoreState } from '../utils/firebaseConfig';
+import { post } from '../utils/api';
+const { REACT_APP_BASE_URL } = process.env;
 
 const initialState = {
     wishlist: [],
-	lists: []
+	lists: [],
+    currentList: {}
 }
 
 const listSlice = createSlice({
@@ -15,17 +18,41 @@ const listSlice = createSlice({
             state.lists = [...state.lists]
             updateFirestoreState({...state});
         },
-        addList: (state, action) => {
-            state.lists = [...state.lists, action.payload];
+        addNewList: (state, action) => {
+            state.lists = [...state.lists, {name: action.payload.name, albums: [action.payload.album]}]
+            state.wishlist = [...state.wishlist]
+            updateFirestoreState({...state});
+        },
+        addToList: (state, action) => {
+            state.lists.forEach((list) => {
+                if (list.name === action.payload.name) {
+                    list.albums.push(action.payload.album);
+                }
+            });
+            state.lists = [...state.lists]
+            state.wishlist = [...state.wishlist]
+            updateFirestoreState({...state});
+        },
+        setCurrentList: (state, action) => {
+            state.currentList = action.payload;
+        },
+        removeFromCurrentList: (state, action) => {
+            state.currentList.albums.filter(album => album !== action.payload);
+            /* Change in lists as well. */
+            state.lists = [...state.lists]
+            state.wishlist = [...state.wishlist]
             updateFirestoreState({...state});
         },
 		syncUserWish: (state, action) => {
 			state.wishlist = action.payload;
+		},
+        syncUserLists: (state, action) => {
+			state.lists = action.payload;
 		}
     }
 });
 
-export const { addWish, syncUserWish } = listSlice.actions;
+export const { addWish, addNewList, addToList, syncUserWish, syncUserLists, setCurrentList, removeFromCurrentList } = listSlice.actions;
 
 export const listSelector = state => state.list
 
@@ -43,12 +70,39 @@ export const addToWish = (album) => {
     }
 }
 
+export const handleList = (exists, name, album) => {
+    return dispatch => {
+        if (!exists) {
+            dispatch(addNewList({name: name, album: album}));
+        } else {
+            dispatch(addToList({name: name, album: album}));
+        }
+    }
+}
+
 export const syncLists = (data) => {
 	return dispatch => {
 		try {
             dispatch(syncUserWish(data.wishlist));
+            dispatch(syncUserLists(data.lists));
         } catch (err) {
             console.log(err)
         }
 	}
+}
+
+export const createPlaylist = (user, list) => {
+    return async (dispatch) => {
+        try {
+            const API_URL = REACT_APP_BASE_URL + `/users/${user}/playlists`
+            const req_body = {
+                "name": "Logify-test",
+                "description": "Playlist created from your list at Logify!"
+            }
+            const data = await post(API_URL, req_body)
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 }

@@ -64,7 +64,8 @@ export const addToLog = (log) => {
 			album: log,
             dateAdded: new Date().toISOString().slice(0, 10),
 			id: Date.now(),
-            rating: (Math.random() * 5).toFixed(1),
+            rating: log.rating,
+            review: log.review
 		}
 		dispatch(addLog(toLog))
     }
