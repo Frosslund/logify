@@ -656,6 +656,7 @@ li {
 
     .buttons {
       padding-top: 20px;
+      display: inline-flex;
     }
 
     .button {
@@ -666,7 +667,7 @@ li {
       border-radius: 0.2rem;
       border: none;
       padding: 7px 15px;
-      text-align: center;
+      text-align: right;
       font-weight: lighter;
       cursor: pointer;
     }
