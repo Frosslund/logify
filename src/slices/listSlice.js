@@ -16,11 +16,13 @@ const listSlice = createSlice({
         addWish: (state, action) => {
             state.wishlist = [...state.wishlist, action.payload];
             state.lists = [...state.lists]
+            state.currentList = {...state.currentList}
             updateFirestoreState({...state});
         },
         addNewList: (state, action) => {
             state.lists = [...state.lists, {name: action.payload.name, albums: [action.payload.album]}]
             state.wishlist = [...state.wishlist]
+            state.currentList = {...state.currentList}
             updateFirestoreState({...state});
         },
         addToList: (state, action) => {
@@ -31,6 +33,7 @@ const listSlice = createSlice({
             });
             state.lists = [...state.lists]
             state.wishlist = [...state.wishlist]
+            state.currentList = {...state.currentList}
             updateFirestoreState({...state});
         },
         setCurrentList: (state, action) => {
@@ -41,6 +44,7 @@ const listSlice = createSlice({
             /* Change in lists as well. */
             state.lists = [...state.lists]
             state.wishlist = [...state.wishlist]
+            state.currentList = {...state.currentList}
             updateFirestoreState({...state});
         },
 		syncUserWish: (state, action) => {
