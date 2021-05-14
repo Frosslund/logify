@@ -1,4 +1,5 @@
 import Popup from 'reactjs-popup';
+import calcRunningTime from "../utils/calcRunningTime";
 import AddToLogComponent from "./components/AddToLogComponent";
 import AddToListComponent from "./components/AddToListComponent";
 
@@ -21,12 +22,6 @@ const AlbumView = (props) => {
 		onAddToList
 	} = props;
 
-	console.log(externalUrl)
-
-	// fixing runnig time string
-	const runningTime_min = Math.ceil(runningTime_ms/1000/60);
-	const runningTime = runningTime_min > 60 ? (Math.floor(runningTime_min/60)).toString() + " hr " + (runningTime_min%60).toString() + " min" : runningTime_min.toString() + " min"
-
 	var playing = false;
 	var songs = {}
 	
@@ -38,7 +33,7 @@ const AlbumView = (props) => {
 					<h4>ALBUM</h4>
 					<h1 class="tighter">{name}</h1>
 					<h3 class="normal">
-						{artists.map(artist => {return artist + " "})} <span>&#x02022;</span> {released} <span>&#x02022;</span> {totalTracks} songs <span>&#x02022;</span> {runningTime} 
+						{artists.map(artist => {return artist + " "})} <span>&#x02022;</span> {released} <span>&#x02022;</span> {totalTracks} songs <span>&#x02022;</span> {calcRunningTime(runningTime_ms)} 
 					</h3>
 					<table class="trackTable">
 						<tr class="firstRow">
@@ -105,7 +100,7 @@ const AlbumView = (props) => {
 				nested
 			>
 				{close => (
-					<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+					<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
 				)}
 			</Popup>
 			<Popup

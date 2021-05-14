@@ -1,4 +1,5 @@
 import LogView from "../views/LogView"
+import { fetchAlbum } from "../slices/albumSlice";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -9,12 +10,12 @@ const mapStateToProps = (state) => {
     };
 }
 
-/* const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onAddToLog: (res) => dispatch(addToLog({...res, id: Date(), dateAdded: Date()}))
+        setAlbum: id => dispatch(fetchAlbum(id)),
     };
-} */
+}
 
-const LogPresenter = connect(mapStateToProps, null)(LogView)
+const LogPresenter = connect(mapStateToProps, mapDispatchToProps)(LogView)
 
 export default LogPresenter;
