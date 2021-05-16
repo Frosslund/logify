@@ -2,9 +2,10 @@ import Popup from 'reactjs-popup';
 import calcRunningTime from "../utils/calcRunningTime";
 import AddToLogComponent from "./components/AddToLogComponent";
 import AddToListComponent from "./components/AddToListComponent";
+import { NavLink } from 'react-router-dom';
 
 const AlbumView = (props) => {
-	
+
 	const {
 		id,
 		name,
@@ -19,7 +20,8 @@ const AlbumView = (props) => {
 		lists,
 		onAddToLog,
 		onAddToWish,
-		onAddToList
+		onAddToList,
+		setArtist
 	} = props;
 
 	var playing = false;
@@ -33,7 +35,19 @@ const AlbumView = (props) => {
 					<h4>ALBUM</h4>
 					<h1 class="tighter">{name}</h1>
 					<h3 class="normal">
-						{artists.map(artist => {return artist + " "})} <span>&#x02022;</span> {released} <span>&#x02022;</span> {totalTracks} songs <span>&#x02022;</span> {calcRunningTime(runningTime_ms)} 
+						{artists.map(artist => {
+            				return (
+              					<NavLink to={`/artist/${artist.id}`} onClick={() => setArtist(artist.id)} key={artist.id} >
+                					{artist.name + "\u0020"}
+              					</NavLink>
+            				)
+          				})}
+						<span>&#x02022;</span> 
+						{released} 
+						<span>&#x02022;</span> 
+						{totalTracks} songs 
+						<span>&#x02022;</span> 
+						{calcRunningTime(runningTime_ms)} 
 					</h3>
 					<table class="trackTable">
 						<tr class="firstRow">
@@ -91,7 +105,7 @@ const AlbumView = (props) => {
 					</table>
 				</div>
 			</div>
-			<button className="toLogButton" onClick={() => onAddToLog({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
+			<button className="toLogButton" onClick={() => onAddToLog({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl})}>
 					ADD TO LOG &#10004;
 			</button>
 			<Popup
@@ -110,7 +124,7 @@ const AlbumView = (props) => {
 			>
 				{close => (
 					<AddToListComponent 
-						album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} 
+						album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} 
 						name={name} 
 						images={images} 
 						released={released} 
@@ -122,7 +136,7 @@ const AlbumView = (props) => {
 					/>
 				)}
 			</Popup>
-      <button className="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id})}>
+      <button className="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl})}>
         LISTEN LATER
       </button>	
 		</div>

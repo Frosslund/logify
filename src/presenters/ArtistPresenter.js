@@ -1,14 +1,12 @@
 import { fetchAlbum } from "../slices/albumSlice";
 import { fetchArtist } from "../slices/artistSlice";
-import ResultsView from "../views/ResultsView"
+import ArtistView from "../views/ArtistView"
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
     return {
-        albums: state.search.albums,
-        artists: state.search.artists,
-        topResult: state.search.topResult,
-        user: state.user.userName
+        artist: state.artist.artist,
+        relatedArtists: state.artist.relatedArtists,
     };
 }
 
@@ -19,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     };
 }
 
-const ResultsPresenter = connect(mapStateToProps, mapDispatchToProps)(ResultsView)
+const ArtistPresenter = connect(mapStateToProps, mapDispatchToProps)(ArtistView)
 
-export default ResultsPresenter;
+export default ArtistPresenter;
     

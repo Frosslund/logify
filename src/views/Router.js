@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import RedirectPage from '../utils/RedirectPage';
 
 import AlbumPresenter from '../presenters/AlbumPresenter';
+import ArtistPresenter from '../presenters/ArtistPresenter';
 import ResultsPresenter from '../presenters/ResultsPresenter';
 import LogPresenter from '../presenters/LogPresenter';
 import ListPresenter from '../presenters/ListPresenter';
@@ -20,6 +21,7 @@ const Router = () => {
 			<Route exact path="/log" component={LogPresenter} />
 			<Route exact path="/lists" component={ListPresenter} />
 			<Route path="/album/:id" component={AlbumPresenter} />
+			<Route path="/artist/:id" component={ArtistPresenter} />
 			<Route path="/lists/:name" component={SingleListPresenter} />
 		</Switch>
 

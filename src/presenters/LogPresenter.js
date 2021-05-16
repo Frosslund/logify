@@ -1,5 +1,6 @@
 import LogView from "../views/LogView"
 import { fetchAlbum } from "../slices/albumSlice";
+import { fetchArtist } from "../slices/artistSlice";
 import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setAlbum: id => dispatch(fetchAlbum(id)),
+        setArtist: id => dispatch(fetchArtist(id)),
     };
 }
 

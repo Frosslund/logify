@@ -5,6 +5,7 @@ import { fetchUser } from '../slices/userSlice';
 import { db } from './firebaseConfig';
 import { syncLog } from '../slices/logSlice';
 import { syncLists } from '../slices/listSlice';
+import { syncAlbum } from '../slices/albumSlice';
 
 const { REACT_APP_BASE_URL } = process.env;
 
@@ -21,6 +22,7 @@ export const HandleUser = () => {
                 // add syncList, syncWishlist when ready
                 dispatch(syncLog(doc.data()));
                 dispatch(syncLists(doc.data()));
+                dispatch(syncAlbum(doc.data()))
             } else {
                 setUser(user)
             }
@@ -53,7 +55,9 @@ export const HandleUser = () => {
                 name: user.display_name,
                 lists: [],
                 wishlist: [],
-                logs: []
+                currenList: {},
+                logs: [],
+                album: {}
             });  
         } catch(err) {
             console.log(err)
