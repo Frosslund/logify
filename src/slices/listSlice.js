@@ -9,7 +9,8 @@ const initialState = {
     currentList: {
         albums: [],
         name: ''
-    }
+    },
+    loading: false
 }
 
 const listSlice = createSlice({
@@ -71,11 +72,14 @@ const listSlice = createSlice({
 		},
         syncCurrentList: (state, action) => {
             state.currentList = action.payload;
+        },
+        setListLoadingState: (state, action) => {
+            state.loading = action.payload;
         }
     }
 });
 
-export const { addWish, addNewList, addToList, syncUserWish, syncUserLists, syncCurrentList, setCurrentList, removeFromCurrentList } = listSlice.actions;
+export const { addWish, addNewList, addToList, syncUserWish, syncUserLists, syncCurrentList, setCurrentList, removeFromCurrentList, setListLoadingState } = listSlice.actions;
 
 export const listSelector = state => state.list
 

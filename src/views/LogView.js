@@ -7,12 +7,14 @@ import Popup from 'reactjs-popup';
 import UserInfo from "./components/UserInfo";
 import calcRunningTime from "../utils/calcRunningTime";
 import AddToListComponent from "./components/AddToListComponent";
+import LoadingSpinner from './components/LoadingSpinner';
 
 
 const LogView =  (props) => {
 
   const {
 		logs,
+    loading,
 		name,
 		imageURL,
     setAlbum,
@@ -124,6 +126,9 @@ const LogView =  (props) => {
   return (
     <>
     <UserInfo name={name} imageURL={imageURL} info={info} view="LOG" />
+    {loading ?
+    <LoadingSpinner />
+    :
     <div class="logView">
       {logs.length > 0 ?
       <Paper square={false} >
@@ -157,6 +162,7 @@ const LogView =  (props) => {
 			</div>
       }
     </div>
+    }
     </>
   );
 };

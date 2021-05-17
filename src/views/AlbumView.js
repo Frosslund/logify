@@ -151,9 +151,9 @@ const AlbumView = (props) => {
 					Later <i class="far fa-clock"></i>
 				</button>
 				<button onClick={() => openAlbum(`spotify:album:${id}`)} className="listen-spotify-button"><i class="fab fa-spotify"></i></button>
+				<span className={`later-prompt__${albumAdded ? "visible" : "hidden"}`}>Album added to "Listen Later"!</span>
 				</div>
 				<span></span>
-				<span className={`later-prompt__${albumAdded ? "visible" : "hidden"}`}>Album added to "Listen Later"!</span>
 			</div>
 			}
 		</div>		

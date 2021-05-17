@@ -6,6 +6,7 @@ const mapStateToProps = (state) => {
     return {
         wishlist: state.list.wishlist,
         lists: state.list.lists,
+        loading: state.list.loading,
         name: state.user.userName,
         imageURL: state.user.userImageURL
     };

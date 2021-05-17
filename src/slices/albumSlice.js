@@ -45,7 +45,7 @@ const albumSlice = createSlice({
             state.runningTime_ms = action.payload.runningTime_ms;
             state.popularity = action.payload.popularity;
         },
-        setLoadingState: (state, action) => {
+        setAlbumLoadingState: (state, action) => {
             state.loading = action.payload;
         }
     }
@@ -54,7 +54,7 @@ const albumSlice = createSlice({
 export const {
     setAlbum,
     syncUserAlbum,
-    setLoadingState
+    setAlbumLoadingState
 } = albumSlice.actions;
 
 export const albumSelector = state => state.album 
@@ -87,7 +87,7 @@ export const fetchAlbum = (album, fromSearch=false) => {
 
     return async dispatch => {
         try {
-            dispatch(setLoadingState(true))
+            dispatch(setAlbumLoadingState(true))
             //const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
             let artists = []
             let tracks = []
@@ -120,7 +120,7 @@ export const fetchAlbum = (album, fromSearch=false) => {
                 popularity: album.popularity,
             }
             dispatch(setAlbum(fixedAlbum))
-            dispatch(setLoadingState(false))       
+            dispatch(setAlbumLoadingState(false))       
         } catch (err) {
             console.log(err)
         }
@@ -130,9 +130,7 @@ export const fetchAlbum = (album, fromSearch=false) => {
 export const syncAlbum = (data) => {
     return dispatch => {
 		try {
-            dispatch(setLoadingState(true));
             dispatch(syncUserAlbum(data.album));
-            dispatch(setLoadingState(false));
         } catch (err) {
             console.log(err)
         }

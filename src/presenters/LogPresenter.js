@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 const mapStateToProps = (state) => {
     return {
         logs: state.log.logs,
+        loading: state.log.loading,
         name: state.user.userName,
         imageURL: state.user.userImageURL,
         lists: state.list.lists

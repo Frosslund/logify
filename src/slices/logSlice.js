@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { updateFirestoreState } from '../utils/firebaseConfig';
 
 const initialState = {
-	logs: []
+	logs: [],
+    loading: false
 }
 
 
@@ -35,11 +36,14 @@ const logSlice = createSlice({
         },
 		syncUserLog: (state, action) => {
 			state.logs = action.payload;
-		}
+		},
+        setLoadingState: (state, action) => {
+            state.loading = action.payload;
+        }
     }
 });
 
-export const { addLog, syncUserLog } = logSlice.actions;
+export const { addLog, syncUserLog, setLoadingState } = logSlice.actions;
 
 export const logSelector = state => state.log
 
@@ -61,9 +65,11 @@ export const addToLog = (log) => {
 }
 
 export const syncLog = (data) => {
-	return dispatch => {
+	return async dispatch => {
 		try {
-            dispatch(syncUserLog(data.logs));
+            dispatch(setLoadingState(true));
+            await dispatch(syncUserLog(data.logs));
+            dispatch(setLoadingState(false));
         } catch (err) {
             console.log(err)
         }

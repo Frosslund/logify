@@ -1,7 +1,8 @@
 import UserInfo from "./components/UserInfo";
 import { NavLink } from 'react-router-dom';
+import LoadingSpinner from "./components/LoadingSpinner";
 
-const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
+const ListView = ({wishlist, lists, name, imageURL, setCurrentList, loading}) => {
 	
 	const info = [`Lists: ${lists.length}`, `Albums in Listen Later: ${wishlist.length}`]
 
@@ -31,6 +32,9 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 	return (
 		<>
 		<UserInfo name={name} imageURL={imageURL} info={info} view="LISTS"/>
+		{loading ?
+		<LoadingSpinner />
+		:
 		<div class="listView">
 				{wishlist.length !== 0 ?
 				<NavLink to="/lists/wishlist" onClick={() => setCurrentList({"albums": wishlist, "name": "Listen Later"})} className="wishlist__individual">
@@ -78,34 +82,8 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 				<dt className="lists__no-list">You have no lists yet!</dt>
 			</dl>
 			}
-
-
-
-
-
-
-{/*             <h3>Wish list:</h3>
-			<table class="logTable">
-				<thead>
-					<tr class="firstRow">
-						<th>Date</th>
-						<th>Album</th>
-						<th>Year</th>
-					</tr>
-				</thead>
-				<tbody>
-					{wishlist.slice(0).reverse().map(wish => {
-						return (
-							<tr>
-								<td>{wish.dateAdded}</td>
-								<td>{wish.album.name}</td>
-								<td>{wish.album.released}</td>
-							</tr>
-						)}
-					)}
-				</tbody>
-			</table> */}
 		</div>
+		}
 		</>
 	);
 }
