@@ -4,7 +4,7 @@
 
 The app can be found deployed here [here](https://logify.netlify.app/home). Login using your own Spotify account or using our test account:
 
-user: dh2642logify@gmail.com
+user: <dh2642logify@gmail.com>
 pass: 2021logify!
 
 
