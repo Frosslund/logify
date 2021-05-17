@@ -3,6 +3,7 @@ import calcRunningTime from "../utils/calcRunningTime";
 import AddToLogComponent from "./components/AddToLogComponent";
 import AddToListComponent from "./components/AddToListComponent";
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 const AlbumView = (props) => {
 
@@ -25,6 +26,19 @@ const AlbumView = (props) => {
 	} = props;
 
 	var playing = false;
+	const [albumAdded, setAlbumAdded] = useState(false);
+	//let albumAdded = false;
+
+	const openAlbum = (url) => {
+		window.open(url, "_blank");
+	}; 
+
+	const handleAlbumAdded = () => {
+		setAlbumAdded(true);
+		setTimeout(() => {
+			setAlbumAdded(false);
+		}, 3000);
+	}
 	var songs = {}
 	
 	return (
@@ -54,7 +68,7 @@ const AlbumView = (props) => {
 							<th>#</th>
 							<th>TITLE</th>
 							<th>
-								<span class="clock">&#9719;</span>
+								<span class="clock"><i class="far fa-clock"></i></span>
 							</th>
 							<th>
 								<span class="play">&#9835;</span>
@@ -104,41 +118,40 @@ const AlbumView = (props) => {
 						)}
 					</table>
 				</div>
+				<Popup
+				trigger={<button> Log <i class="fas fa-pencil-alt"></i></button>}
+				modal
+				nested
+				>
+					{close => (
+						<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+					)}
+				</Popup>
+				<Popup
+					trigger={<button>List <i class="fas fa-list"></i></button>}
+					modal
+					nested
+				>
+					{close => (
+						<AddToListComponent 
+							album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} 
+							name={name} 
+							images={images} 
+							released={released} 
+							artists={artists} 
+							close={close} 
+							lists={lists}
+							onAddToWish={onAddToWish}
+							onAddToList={onAddToList} 
+						/>
+					)}
+				</Popup>
+				<button className="listen-later-button" onClick={() => {onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}); handleAlbumAdded();}}>
+					Later <i class="far fa-clock"></i>
+				</button>
+				<button onClick={() => openAlbum(`spotify:album:${id}`)} className="listen-spotify-button"><i class="fab fa-spotify"></i></button>
+				<p className={`later-prompt__${albumAdded ? "visible" : "hidden"}`}>Album added to "Listen Later"!</p>
 			</div>
-			<button className="toLogButton" onClick={() => onAddToLog({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl})}>
-					ADD TO LOG &#10004;
-			</button>
-			<Popup
-				trigger={<button class="toLogButton"> ADD TO LOG NOT WORKING &#10004;</button>}
-				modal
-				nested
-			>
-				{close => (
-					<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
-				)}
-			</Popup>
-			<Popup
-				trigger={<button class="toLogButton"> ADD TO LIST NOT WORKING &#10004;</button>}
-				modal
-				nested
-			>
-				{close => (
-					<AddToListComponent 
-						album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} 
-						name={name} 
-						images={images} 
-						released={released} 
-						artists={artists} 
-						close={close} 
-						lists={lists}
-						onAddToWish={onAddToWish}
-						onAddToList={onAddToList} 
-					/>
-				)}
-			</Popup>
-      <button className="toLogButton" onClick={() => onAddToWish({name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl})}>
-        LISTEN LATER
-      </button>	
 		</div>
 		
 	)

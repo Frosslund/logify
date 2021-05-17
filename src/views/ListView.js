@@ -33,12 +33,11 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 		<>
 		<UserInfo name={name} imageURL={imageURL} info={info}/>
 		<div class="listView">
-			
-
-				<NavLink to="/lists/wishlist" className="wishlist__individual">
+				{wishlist.length !== 0 ?
+				<NavLink to="/lists/wishlist" onClick={() => setCurrentList({"albums": wishlist, "name": "Listen Later"})} className="wishlist__individual">
 					<div className="wishlist__image-stack">
 						{albumBoxes.map((box, idx) => {return (
-							<img className={"wishlist__image-stack-item wishlist__image-stack-item--" + box} src={wishlist[idx].album.images[1].url} alt=""/>
+							<img className={"wishlist__image-stack-item wishlist__image-stack-item--" + box} src={wishlist[wishlist.length - (idx + 1)].images[1].url} alt=""/>
 						)})}
 						{blackBoxes.length > 0 ? blackBoxes.map(box => {return (
 							<div className={"wishlist__blackbox wishlist__image-stack-item--" + box}></div>
@@ -49,7 +48,14 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 						<p>{wishlist.length} {wishlist.length === 1 ? "album" : "albums"}</p>
 					</div>
 				</NavLink>
-
+				:
+				<div className="wishlist__infobox">
+					<h4>Listen Later</h4>
+					<p>{wishlist.length} {wishlist.length === 1 ? "album" : "albums"}</p>
+				</div>
+				}
+			
+			{lists.length !== 0 ? 
 			<dl className="lists">
 				{lists.map((list, idx) => {return (
 					<NavLink to={`/lists/${list.name}`} onClick={() => setCurrentList(list)} className="lists__individual">
@@ -68,6 +74,11 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 					</NavLink>
 				)})}
 			</dl>
+			:
+			<dl className="lists">
+				<dt className="lists__no-list">You have no lists yet!</dt>
+			</dl>
+			}
 
 
 

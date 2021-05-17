@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
     return {
-        loggedInUser: state.user.loggedIn
+        userId: state.user.userId
     };
 }
 

@@ -4,7 +4,7 @@ const initialState = {
     loggedIn: false,
     userName: '',
     userId: '',
-    userImageURL: []
+    userImageURL: 'https://developer.spotify.com/assets/branding-guidelines/icon2@2x.png'
 }
 
 const userSlice = createSlice({
