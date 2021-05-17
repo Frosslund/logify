@@ -23,7 +23,7 @@ The file structure follows create-react-app. In the scr-folder we have structure
 
 Each file and what the do:
 
-##view-folder
+#view-folder
 
 -singleListView.js - view to display a single list, which can be the “Listen Later”-list as well as a user created list. From here, albums can be removed from the list and a Spotify playlist based on the albums contained in the list can be created for authorized user. 
 
