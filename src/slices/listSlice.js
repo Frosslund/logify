@@ -40,8 +40,18 @@ const listSlice = createSlice({
             state.currentList = action.payload;
         },
         removeFromCurrentList: (state, action) => {
-            state.currentList.albums.filter(album => album !== action.payload);
-            /* Change in lists as well. */
+            if (state.currentList.name === "Listen Later") {
+                state.wishlist = state.wishlist.filter(album => album.id !== action.payload.id);
+            } else {
+            state.lists.forEach(list => {
+                if (list.name === state.currentList.name) {
+                    list.albums = list.albums.filter(album => album.id !== action.payload.id);
+                    if (list.albums.length === 0) {
+                        state.lists = state.lists.filter(oneList => oneList.name !== list.name)
+                    }
+                }
+            })};
+            state.currentList.albums = state.currentList.albums.filter(album => album.id !== action.payload.id);
             state.lists = [...state.lists]
             state.wishlist = [...state.wishlist]
             state.currentList = {...state.currentList}
@@ -64,13 +74,7 @@ export default listSlice.reducer
 
 export const addToWish = (album) => {
     return dispatch => {
-        console.log(album)
-		const newWish = {
-			album: album,
-            dateAdded: new Date().toISOString().slice(0, 10),
-			id: Date.now(),
-		}
-		dispatch(addWish(newWish))
+		dispatch(addWish(album))
     }
 }
 
@@ -98,13 +102,23 @@ export const syncLists = (data) => {
 export const createPlaylist = (user, list) => {
     return async (dispatch) => {
         try {
-            const API_URL = REACT_APP_BASE_URL + `/users/${user}/playlists`
-            const req_body = {
-                "name": "Logify-test",
-                "description": "Playlist created from your list at Logify!"
+            console.log(list)
+            let listOfTracks = []
+            list.albums.forEach(album => {
+                album.tracks.forEach(track => {
+                    listOfTracks.push(`spotify:track:${track.id}`)
+                })
+            })
+            let API_URL = REACT_APP_BASE_URL + `/users/${user}/playlists`
+            let req_body = {
+                "name": `Logify-${list.name}`,
+                "description": `Playlist created from your list "${list.name}" at Logify!`
             }
             const data = await post(API_URL, req_body)
-            console.log(data)
+            API_URL = REACT_APP_BASE_URL + `/playlists/${data.id}/tracks`
+            req_body = {"uris": listOfTracks}
+            const addedData = await post(API_URL, req_body)
+            console.log(addedData)
         } catch (err) {
             console.log(err)
         }

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import ReactStars from "react-rating-stars-component";
+import { NavLink } from 'react-router-dom';
 
 const AddToLogComponent = ({ album, name, images, released, artists, close, onAddToLog }) => {
 
     const [logState, setLogState] = useState({
         rating: 0,
-        review: ""
+        review: "",
+        complete: false
     });
 
     const handleRating = (newRating) => {
@@ -21,7 +23,8 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
     const handleSubmit = () => {
         if (logState.rating !== 0) {
             onAddToLog({...album, ...logState })
-            close();
+            setLogState({...logState, complete: true})
+            /* close(); */
         } else {
             console.log("Fill in rating!");
         }
@@ -33,7 +36,7 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
             &times;
             </button>
             <img className="popup__image" src={images[1].url}  alt="" />
-
+            {!logState.complete ?
             <div className="popup__content">
                 <h3>{name}    		<span>		{released}</span></h3>
                 <p>{artists.map(artist => {return artist + " "})}</p>
@@ -51,7 +54,13 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
 
                 <button className="saveButton" onClick={handleSubmit}>SAVE</button>
             </div>
-
+            :
+            <div className="popup__content">
+                <p>Album added to log!</p>
+                <NavLink to="/log" className="logactionbuttons">Go to your log</NavLink>
+                <button className="logactionbuttons" onClick={() => close()}>Close</button>
+            </div>
+            }
         </div>
     )
 }

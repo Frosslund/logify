@@ -6,6 +6,7 @@ const initialState = {
     topResult: {},
     albums: [],
     artists: [],
+    newReleases: []
 }
 
 const searchSlice = createSlice({
@@ -20,11 +21,14 @@ const searchSlice = createSlice({
         },
         setTopResult: (state, action) => {
             state.topResult = action.payload
+        },
+        setNewReleases: (state, action) => {
+            state.newReleases = action.payload;
         }
     }
 });
 
-export const { setAlbumResults, setArtistsResults, setTopResult } = searchSlice.actions;
+export const { setAlbumResults, setArtistsResults, setTopResult, setNewReleases } = searchSlice.actions;
 
 export const searchSelector = state => state.search
 
@@ -49,6 +53,19 @@ export const initiateSearch = (searchTerm) => {
             dispatch(setTopResult(sortedAlbums[0]))
             dispatch(setAlbumResults(sortedAlbums))
             dispatch(setArtistsResults(artistData))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+}
+
+export const getNewReleases = () => {
+    return async (dispatch) => {
+        try {
+            const API_URL = REACT_APP_BASE_URL + '/browse/new-releases?limit=50';
+            const releaseData = await get(API_URL)
+            const albumsData = releaseData.albums.items.filter(item => item.album_type !== "single")
+            dispatch(setNewReleases(albumsData))
         } catch (err) {
             console.log(err)
         }

@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import SingleListView from "../views/SingleListView"; 
 import { removeFromCurrentList, createPlaylist } from "../slices/listSlice";
+import { fetchAlbum } from "../slices/albumSlice";
 
 const mapStateToProps = (state) => {
     return {
@@ -12,7 +13,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         removeFromCurrentList: (res) => {dispatch(removeFromCurrentList(res))},
-        createPlaylist: (user, list) => {dispatch(createPlaylist(user, list))}
+        createPlaylist: (user, list) => {dispatch(createPlaylist(user, list))},
+        setAlbum: id => dispatch(fetchAlbum(id))
     };
 }
 

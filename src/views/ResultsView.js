@@ -1,7 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import _ from 'lodash'; 
+import { handleLogin } from '../utils/handleLogin';
+import Popup from 'reactjs-popup';
+import AddToLogComponent from "./components/AddToLogComponent";
 
-const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
+const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, getNewReleases, onAddToLog }) => {
+
+	if (newReleases.length === 0) {
+		getNewReleases();
+	}
+
+	const openAlbum = (url) => {
+		window.open(url, "_blank");
+	} 
+
 	return (
 		<div>
 			{artists.length === 0 ?
@@ -12,6 +24,54 @@ const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
 						Welcome <span className="no_search_text__username">{user}</span>
 					</div>
 					<div className="no_search_text__subtext">Search for albums and artists!</div>
+					<h2 className="new-releases__header">New Releases:</h2>
+					<div className="new-releases">
+						{newReleases.length !== 0 ?
+						newReleases.slice(0, 5).map(release => {
+							return (
+								<div className="new-releases__item">
+									<NavLink
+										to={`/album/${release.id}`}
+										key={release.id}
+										onClick={() => setAlbum(release)}
+									>
+										<img src={release.images[1].url} alt=""/>
+									</NavLink>								
+									<p className="new-releases__item__artist" alt="">{release.artists[0].name}</p>
+									<NavLink style={{ textDecoration: 'none', color: 'inherit' }}
+										to={`/album/${release.id}`}
+										key={release.id+" "}
+										onClick={() => setAlbum(release)}
+									>
+										<p className="new-releases__item__album">{release.name}</p>
+									</NavLink>
+									<div className="new-releases__item__buttons">
+										<button onClick={() => openAlbum(`spotify:album:${release.id}`)} className="new_releases__item__link"><i class="fab fa-spotify"></i></button>
+										<Popup
+										trigger={<button to={"#"} className="new_releases__item__link">Log &#9998;</button>}
+										modal
+										nested
+										>
+											{close => (
+											<AddToLogComponent 
+												album={{...release}} 
+												name={release.name} 
+												images={release.images} 
+												released={release.released} 
+												artists={release.artists} 
+												close={close} 
+												onAddToLog={onAddToLog}
+											/>
+											)}
+										</Popup>			
+									</div>
+								</div>
+							);
+						})
+						:
+						<span></span>
+						}
+					</div>
 				</div>
 				:
 				<div>
@@ -19,6 +79,11 @@ const ResultsView = ({albums, artists, topResult, user, setAlbum}) => {
 						Welcome to <span className="no_search_text__username">Logify</span>
 					</div>
 					<div className="no_search_text__subtext">Please login to start logging!</div>
+					<div className="no_search_text__subtext">
+						<button onClick={handleLogin} className="saveButton loginButton">
+							Login with Spotify
+						</button>
+					</div>
 				</div>
 				}
 			</div>
