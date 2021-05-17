@@ -45,6 +45,8 @@ fonts-folder - the font used for the app
 
 index.js - renders the app
 
+store.js - redux store file, combining all slices
+
 presenters-folder:
 
   -AlbumPresenter.js - connecting album state to view, dispatches logs and list additions
@@ -74,6 +76,24 @@ slices-folder:
   -searchSlice - redux handling of state concerning search information
 
   -userSlice - redux handling of state concerning user data information, fetched on reload
+  
+utils-folder:
+
+-api.js - get and post functions using axios for more convinient api calls
+
+-calcRunningTime.js - helper function
+
+-firebaseConfig.js - handles Firestore connection and update
+
+-getParamValues.js - helper function when connecting to Spotify
+
+-handleLogin.js - helper function when connecting to Spotify
+
+-handleUser.js - deals with syncing user to Firestore
+
+-RedirectPage.js - helps with redirect when connecting to Spotify
+
+-setAuthHeader.js - helper function for authentification when making api calls
 
 
 
