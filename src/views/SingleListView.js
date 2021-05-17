@@ -1,8 +1,9 @@
 import { useState } from "react";
 import ReactTooltip from "react-tooltip";
 import { NavLink } from "react-router-dom";
+import LoadingSpinner from "./components/LoadingSpinner";
 
-const SingleListView = ({ currentList, user, removeFromCurrentList, createPlaylist, setAlbum }) => {
+const SingleListView = ({ currentList, user, removeFromCurrentList, createPlaylist, setAlbum, loading }) => {
 
     window.scrollTo(0, 0);
     const [editMode, setEditMode] = useState(false);
@@ -31,6 +32,9 @@ const SingleListView = ({ currentList, user, removeFromCurrentList, createPlayli
 
 	return (
         <div>
+            {loading ?
+            <LoadingSpinner />
+            :
             <div class="singleListView">
                 <div className="singleListView__infobox">
                     <h1>{currentList.name}</h1>
@@ -61,6 +65,7 @@ const SingleListView = ({ currentList, user, removeFromCurrentList, createPlayli
                     )                    
                 })}
             </div>
+            }
         </div>
 	);
 }

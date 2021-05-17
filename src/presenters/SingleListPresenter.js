@@ -6,6 +6,7 @@ import { fetchAlbum } from "../slices/albumSlice";
 const mapStateToProps = (state) => {
     return {
         currentList: state.list.currentList,
+        loading: state.list.loading,
         user: state.user.userId
     };
 }
