@@ -86,7 +86,7 @@ const AddToListComponent = ({ album, name, images, released, artists, close, lis
             {!listState.complete ?
             <div className="popup__content">
                 <h3>{name}    		<span>		{released}</span></h3>
-                <p>{artists.map(artist => {return artist + " "})}</p>
+                <p>{artists.map(artist => {return artist.name + " "})}</p>
 
                 {lists.length > 0 ? <h4>ADD ALBUM TO LIST:</h4> : <span></span>}
                 <div>
