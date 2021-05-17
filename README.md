@@ -5,6 +5,7 @@
 The app can be found deployed here [here](https://logify.netlify.app/home). Login using your own Spotify account or using our test account:
 
 user: `dh2642logify@gmail.com`
+
 pass: 2021logify!
 
 PS. To be able to make post requests to Spotify, the token used from Spotify grant us authority to alter playlists on accounts. We handle this carefully, but use the test account if there is any doubt DS.
@@ -37,8 +38,11 @@ A loading spinner will be implemented, which will make the user experience bette
 The file structure follows create-react-app. In the scr-folder we have structured the code following the mvp design pattern with a folder for views, for presenters, and folders for redux state handling. Each view has a presenter and a redux slice handling state. We use connect to link presenter, redux and view. We persit the data using Google Firestore. Here we store the user modified data. We use the Redux Toolkit-slices, where each slice acts as a bundle of actions and a reducer for the application, which are then combined in the store.js file located in the main src-folder. We use react-router-dom tools for navigation. 
 
 Each file and what the do:
+
 App.scss - the sass file containing all css for the app
+
 fonts-folder - the font used for the app
+
 index.js - 
 
 
