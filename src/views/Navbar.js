@@ -15,9 +15,9 @@ const Navbar = ({ doSearch, clearSearch, userId, logOutUser }) => {
     };
 
 	const handleUserLogout = () => {
+		window.location.reload();
 		logOutUser();
 		handleLogout();
-		window.location.reload();
 	}
 
     return (
@@ -60,7 +60,7 @@ const Navbar = ({ doSearch, clearSearch, userId, logOutUser }) => {
 						}
 					</li>
 					<li className="navbar__item">
-						<NavLink to={userId !== "" ? "/" : "#"} className="navbar__link" onClick={userId !== "" ? handleUserLogout : handleLogin}>
+						<NavLink to={userId !== "" ? "/home" : "#"} className="navbar__link" onClick={userId !== "" ? handleUserLogout : handleLogin}>
 							{userId !== "" ?
 							<span>Logout</span> 
 							:

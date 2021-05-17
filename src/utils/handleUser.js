@@ -38,22 +38,6 @@ export const HandleUser = () => {
          
     }  
 
-/*     const getUserData = async (user) => {
-        console.log(user)
-        try {
-            let docRef = db.collection('users').doc(user.id);
-            let doc = await docRef.get();
-            if (doc.exists) {
-                console.log("hej")
-                dispatch(syncUser(doc.data()));
-            } else {
-                setUser(user)
-            }
-        } catch(err) {
-            console.log(err)
-        }  
-    } */
-
     const setUser = async (user) => {
         try {
             let usersRef = db.collection('users');
