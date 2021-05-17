@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setAlbum: id => dispatch(fetchAlbum(id, true)),
-        setArtist: id => dispatch(fetchArtist(id))
+        setArtist: id => dispatch(fetchArtist(id)),
         getNewReleases: () => dispatch(getNewReleases()),
         onAddToLog: (res) => {dispatch(addToLog(res));}
     };

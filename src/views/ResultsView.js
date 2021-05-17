@@ -4,7 +4,7 @@ import { handleLogin } from '../utils/handleLogin';
 import Popup from 'reactjs-popup';
 import AddToLogComponent from "./components/AddToLogComponent";
 
-const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, getNewReleases, onAddToLog }) => {
+const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, getNewReleases, onAddToLog, setArtist }) => {
 
 	if (newReleases.length === 0) {
 		getNewReleases();
@@ -13,8 +13,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, g
 	const openAlbum = (url) => {
 		window.open(url, "_blank");
 	} 
-
-const ResultsView = ({albums, artists, topResult, user, setAlbum, setArtist}) => {
+	console.log(newReleases);
 	return (
 		<div>
 			{artists.length === 0 ?
@@ -225,5 +224,6 @@ const ResultsView = ({albums, artists, topResult, user, setAlbum, setArtist}) =>
 		</div>
 	);
 }
+
 
 export default ResultsView;
