@@ -1,5 +1,16 @@
 # Logify (DH2642 Project)
 
+## How to use the app
+
+The app can be found deployed here [here](https://logify.netlify.app/home). Login using your own Spotify account or using our test account:
+
+user: dh2642logify@gmail.com
+pass: 2021logify!
+
+
+
+
+
 ## Short description of the project
 
 An app called Logify where a user can log his/her music listening as a sort of music diary. Also rate and review albums and create personalized lists. The app will utilize Spotifys Web API, which means that users will login to the app using their Spotify account.
