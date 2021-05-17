@@ -27,55 +27,59 @@ const LogView =  (props) => {
   }; 
 
   const RowDetail = ({ row }) => (
-
-    <div className="collapseContent">
-      <div className="albumInfoLog">
-        <h6>ALBUM</h6>
-        <NavLink to={`/album/${row.log.album.id}`} onClick={() => setAlbum(row.log.album)} key={row.log.album.id} >
-          <h3>{row.log.album.name}</h3>
-        </NavLink>
-        <h5 class="artistLog">
-          {row.log.album.artists.map(artist => {
-            return (
-              <NavLink to={`/artist/${artist.id}`} onClick={() => setArtist(artist.id)} key={artist.id} >
-                {artist.name + "\u0020"}
-              </NavLink>
-            )
-          })}
-          <p>{row.log.album.totalTracks} songs</p>
-          <p>{calcRunningTime(row.log.album.runningTime_ms)}</p>
-        </h5>
-        <p className="buttons">
-        <Popup
-          trigger={<button className="button">List <i class="fas fa-list"></i></button>}
-          modal
-          nested
-        >
-            {close => (
-              <AddToListComponent 
-                album={{...row.log.album}} 
-                name={row.log.album.name} 
-                images={row.log.album.images} 
-                released={row.log.album.released} 
-                artists={row.log.album.artists} 
-                close={close} 
-                lists={lists}
-                onAddToWish={onAddToWish}
-                onAddToList={onAddToList} 
-              />
-            )}
-          </Popup>
-          <button className="button" onClick={() => openAlbum(`spotify:album:${row.log.album.id}`)}>
-            <i class="fab fa-spotify"></i>
-          </button>
-        </p>
+    <div>
+      <div className="collapseContent">
+        <div className="albumInfoLog">
+          <h6>ALBUM</h6>
+          <NavLink to={`/album/${row.log.album.id}`} onClick={() => setAlbum(row.log.album)} key={row.log.album.id} >
+            <h3>{row.log.album.name}</h3>
+          </NavLink>
+          <h5 class="artistLog">
+            {row.log.album.artists.map(artist => {
+              return (
+                <NavLink to={`/artist/${artist.id}`} onClick={() => setArtist(artist.id)} key={artist.id} >
+                  {artist.name + "\u0020"}
+                </NavLink>
+              )
+            })}
+            <p>{row.log.album.totalTracks} songs</p>
+            <p>{calcRunningTime(row.log.album.runningTime_ms)}</p>
+          </h5>
+          <p className="buttons">
+          <Popup
+            trigger={<button className="button">List <i class="fas fa-list"></i></button>}
+            modal
+            nested
+          >
+              {close => (
+                <AddToListComponent 
+                  album={{...row.log.album}} 
+                  name={row.log.album.name} 
+                  images={row.log.album.images} 
+                  released={row.log.album.released} 
+                  artists={row.log.album.artists} 
+                  close={close} 
+                  lists={lists}
+                  onAddToWish={onAddToWish}
+                  onAddToList={onAddToList} 
+                />
+              )}
+            </Popup>
+            <button className="button" onClick={() => openAlbum(`spotify:album:${row.log.album.id}`)}>
+              <i class="fab fa-spotify"></i>
+            </button>
+          </p>
+        </div>
+        <div>
+          <img alt="" src={row.log.album.images[1].url} />
+        </div>
+        <div className="reviewLog">
+          <h5>Review:</h5>
+          <p>{row.log.review === "" ? "No review yet, ready to add one?" : `"${row.log.review}"`}</p>
+        </div>
       </div>
-      <div>
-        <img alt="" src={row.log.album.images[1].url} />
-      </div>
-      <div className="reviewLog">
-        <h5>Review:</h5>
-        <p>{row.log.review === "" ? "No review yet, ready to add one?" : `"${row.log.review}"`}</p>
+      <div class="divider">
+        <hr></hr>
       </div>
     </div>
   );
@@ -114,12 +118,14 @@ const LogView =  (props) => {
     return allRows;
   }
 
-  const info = `Logged albums: ${logs.length}`
+  const last = logs.length > 0 ? `Last album logged: ${logs[logs.length-1].album.name}` : `Last album logged: None, yet`
+  const info = [`Logged albums: ${logs.length}`, last]
 
   return (
     <>
-    <UserInfo name={name} imageURL={imageURL} info={info} />
+    <UserInfo name={name} imageURL={imageURL} info={info} view="LOG" />
     <div class="logView">
+      {logs.length > 0 ?
       <Paper square={false} >
         <Grid 
           rows={rowFix(logs)}
@@ -145,6 +151,11 @@ const LogView =  (props) => {
           />
         </Grid>
       </Paper>
+      :
+      <div className="noLog">
+				<h1>No logs yet, start logging!</h1>
+			</div>
+      }
     </div>
     </>
   );

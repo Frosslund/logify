@@ -54,8 +54,8 @@ export const initiateSearch = (searchTerm) => {
             const sortedAlbums = data.albums.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1)
             //console.log(artistData[0])
             //console.log(sortedAlbums[0])
-            /* dispatch(setTopResult(sortedAlbums[0].popularity > artistData[0].popularity ? sortedAlbums[0] : artistData[0])) */
-            dispatch(setTopResult(sortedAlbums[0]))
+            dispatch(setTopResult(sortedAlbums[0].popularity > artistData[0].popularity ? sortedAlbums[0] : artistData[0]))
+            //dispatch(setTopResult(sortedAlbums[0]))
             dispatch(setAlbumResults(sortedAlbums))
             dispatch(setArtistsResults(artistData))
             dispatch(setLoadingState(false))

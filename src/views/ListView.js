@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 	
-	const numOfLists = 3
-	const info = `Lists: ${numOfLists} | Albums in wish list: ${wishlist.length}`
+	const info = [`Lists: ${lists.length}`, `Albums in Listen Later: ${wishlist.length}`]
 
 	const classes = ["top", "middle-one", "middle-two", "bottom"]
 	let blackBoxes = []
@@ -31,7 +30,7 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 	
 	return (
 		<>
-		<UserInfo name={name} imageURL={imageURL} info={info}/>
+		<UserInfo name={name} imageURL={imageURL} info={info} view="LISTS"/>
 		<div class="listView">
 				{wishlist.length !== 0 ?
 				<NavLink to="/lists/wishlist" onClick={() => setCurrentList({"albums": wishlist, "name": "Listen Later"})} className="wishlist__individual">

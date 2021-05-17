@@ -47,10 +47,11 @@ export default logSlice.reducer
 
 export const addToLog = (log) => {
     return dispatch => {
-		console.log(log)
+		const time1 = new Date().toISOString().slice(0, 10)
+		const time2 = new Date().toISOString().slice(11, 16)
 		const toLog = {
 			album: log,
-            dateAdded: new Date().toISOString().slice(0, 10),
+            dateAdded: time1 + " " + time2,
 			id: Date.now(),
             rating: log.rating,
             review: log.review
