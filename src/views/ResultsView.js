@@ -122,7 +122,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, loading, user, se
 				:
 				<div className="gallery gallery_top">
 					<NavLink
-						to="#"
+						to={`/artist/${topResult.id}`}
 						key={topResult.id}
 						className="gallery__item gallery_top__topresult"
 					>
@@ -143,7 +143,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, loading, user, se
 								{topResult.name}
 							</div>
 							<div className="gallery__item__info--genres">
-								{topResult.genres.toString()}
+								{topResult.genres.slice(0, 2).toString()}
 							</div>
 						</div>
 					</NavLink>

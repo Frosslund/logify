@@ -39,7 +39,7 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
             {!logState.complete ?
             <div className="popup__content">
                 <h3>{name}    		<span>		{released}</span></h3>
-                <p>{artists.map(artist => {return artist + " "})}</p>
+                <p>{artists.map(artist => {return artist.name + " "})}</p>
                 
                 <h4>Rating:</h4>
                 <ReactStars

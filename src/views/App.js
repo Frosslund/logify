@@ -5,6 +5,7 @@ import '../App.scss';
 import { handleLogout } from '../utils/handleLogin';
 import { HandleUser } from '../utils/handleUser';
 import NavbarPresenter from '../presenters/NavbarPresenter';
+import FooterPresenter from '../presenters/FooterPresenter';
 
 const App = () => {
 	if ((localStorage.expiry_time <= Date.now())) handleLogout();
@@ -14,6 +15,7 @@ const App = () => {
 			<div className="App">
 				<NavbarPresenter />
 				<Router />
+				<FooterPresenter />
 			</div>
 		</BrowserRouter>
 	);

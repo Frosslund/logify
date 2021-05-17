@@ -18,7 +18,6 @@ const AlbumView = (props) => {
 		released,
 		runningTime_ms,
 		popularity,
-		externalUrl,
 		loading,
 		lists,
 		onAddToLog,
@@ -61,12 +60,7 @@ const AlbumView = (props) => {
               					</NavLink>
             				)
           				})}
-						<span>&#x02022;</span> 
-						{released} 
-						<span>&#x02022;</span> 
-						{totalTracks} songs 
-						<span>&#x02022;</span> 
-						{calcRunningTime(runningTime_ms)} 
+						<span>&#x02022;</span> {released} <span>&#x02022;</span> {totalTracks} songs <span>&#x02022;</span> {calcRunningTime(runningTime_ms)} 
 					</h3>
 					<table class="trackTable">
 						<tr class="firstRow">
@@ -130,7 +124,7 @@ const AlbumView = (props) => {
 				nested
 				>
 					{close => (
-						<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id, externalUrl}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
+						<AddToLogComponent album={{name, artists, tracks, totalTracks, images, released, runningTime_ms, popularity, id}} name={name} images={images} released={released} artists={artists} close={close} onAddToLog={onAddToLog} />
 					)}
 				</Popup>
 				<Popup

@@ -16,7 +16,6 @@ const mapStateToProps = (state) => {
         released: state.album.released,
         runningTime_ms: state.album.runningTime_ms,
         popularity: state.album.popularity,
-        externalUrl: state.album.externalUrl,
         loading: state.album.loading,
         lists: state.list.lists
     };
