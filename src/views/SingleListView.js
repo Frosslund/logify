@@ -50,7 +50,7 @@ const SingleListView = ({ currentList, user, removeFromCurrentList, createPlayli
                                     </NavLink>
                                     <p>{albumIndices[idx]}</p>
                                     <ReactTooltip id={album.name} place="top" effect="solid">
-                                        {album.name} by {album.artists[0]}
+                                        {album.name} by {album.artists[0].name}
                                     </ReactTooltip>
                                 </span>   
                                 :

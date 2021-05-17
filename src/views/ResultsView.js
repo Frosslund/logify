@@ -14,6 +14,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, g
 		window.open(url, "_blank");
 	} 
 
+const ResultsView = ({albums, artists, topResult, user, setAlbum, setArtist}) => {
 	return (
 		<div>
 			{artists.length === 0 ?
@@ -191,7 +192,8 @@ const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, g
 				<div className="gallery">
 					{artists.slice(0, 8).map(artist => (
 						<NavLink
-							to="#"
+							to={`/artist/${artist.id}`}
+							onClick={() => setArtist(artist.id)}
 							key={artist.id}
 							className="gallery__item"
 						>
@@ -212,7 +214,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, user, setAlbum, g
 									{artist.name}
 								</div>
 								<div className="gallery__item__info--genres">
-									{artist.genres.toString()}
+									{artist.genres.slice(0, 2).join(', ')}
 								</div>
 							</div>
 						</NavLink>

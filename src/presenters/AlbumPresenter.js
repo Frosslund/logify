@@ -2,6 +2,8 @@ import AlbumView from "../views/AlbumView"
 import { connect } from "react-redux";
 import { addToLog } from "../slices/logSlice";
 import { addToWish, handleList } from "../slices/listSlice";
+import { fetchArtist } from "../slices/artistSlice";
+
 
 const mapStateToProps = (state) => {
     return {
@@ -23,7 +25,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onAddToLog: (res) => {dispatch(addToLog(res));},
         onAddToWish: (res) => {dispatch(addToWish(res));},
-        onAddToList: (exists, name, album) => {dispatch(handleList(exists, name, album));}
+        onAddToList: (exists, name, album) => {dispatch(handleList(exists, name, album));},
+        setArtist: id => dispatch(fetchArtist(id)),
     };
 }
 

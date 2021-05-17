@@ -15,8 +15,9 @@ const LogView =  (props) => {
 		logs,
 		name,
 		imageURL,
-    lists,
     setAlbum,
+    setArtist,
+    lists,
     onAddToWish,
     onAddToList
 	} = props;
@@ -26,15 +27,21 @@ const LogView =  (props) => {
   }; 
 
   const RowDetail = ({ row }) => (
+
     <div className="collapseContent">
-      {console.log(row.log)}
       <div className="albumInfoLog">
         <h6>ALBUM</h6>
         <NavLink to={`/album/${row.log.album.id}`} onClick={() => setAlbum(row.log.album)} key={row.log.album.id} >
           <h3>{row.log.album.name}</h3>
         </NavLink>
-        <h5 className="artistLog">
-          <p>{row.log.album.artists.map(artist => {return artist + " "})}</p>
+        <h5 class="artistLog">
+          {row.log.album.artists.map(artist => {
+            return (
+              <NavLink to={`/artist/${artist.id}`} onClick={() => setArtist(artist.id)} key={artist.id} >
+                {artist.name + "\u0020"}
+              </NavLink>
+            )
+          })}
           <p>{row.log.album.totalTracks} songs</p>
           <p>{calcRunningTime(row.log.album.runningTime_ms)}</p>
         </h5>
@@ -110,8 +117,9 @@ const LogView =  (props) => {
   const info = `Logged albums: ${logs.length}`
 
   return (
+    <>
+    <UserInfo name={name} imageURL={imageURL} info={info} />
     <div class="logView">
-      <UserInfo name={name} imageURL={imageURL} info={info} />
       <Paper square={false} >
         <Grid 
           rows={rowFix(logs)}
@@ -138,6 +146,7 @@ const LogView =  (props) => {
         </Grid>
       </Paper>
     </div>
+    </>
   );
 };
 

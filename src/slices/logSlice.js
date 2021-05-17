@@ -36,18 +36,6 @@ const logSlice = createSlice({
 		syncUserLog: (state, action) => {
 			state.logs = action.payload;
 		}
-        /* addLog: (state, action) => {
-            state.logs[action.payload.id] = action.payload.data;
-            updateFirestoreState(state)
-        },
-        updateLog: (state, action) => {
-            state.logs[action.payload.id] = action.payload.data;
-            updateFirestoreState(state)
-        },
-        removeLog: (state, action) => {
-            delete state.logs[action.payload]
-            updateFirestoreState(state)
-        } */
     }
 });
 

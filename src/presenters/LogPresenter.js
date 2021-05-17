@@ -1,5 +1,6 @@
 import LogView from "../views/LogView"
 import { fetchAlbum } from "../slices/albumSlice";
+import { fetchArtist } from "../slices/artistSlice";
 import { addToWish, handleList } from "../slices/listSlice";
 import { connect } from "react-redux";
 
@@ -15,6 +16,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setAlbum: id => dispatch(fetchAlbum(id)),
+        setArtist: id => dispatch(fetchArtist(id)),
         onAddToWish: (res) => {dispatch(addToWish(res));},
         onAddToList: (exists, name, album) => {dispatch(handleList(exists, name, album));}
     };

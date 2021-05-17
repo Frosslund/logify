@@ -6,7 +6,10 @@ const { REACT_APP_BASE_URL } = process.env;
 const initialState = {
     wishlist: [],
 	lists: [],
-    currentList: {}
+    currentList: {
+        albums: [],
+        name: ''
+    }
 }
 
 const listSlice = createSlice({
@@ -38,6 +41,9 @@ const listSlice = createSlice({
         },
         setCurrentList: (state, action) => {
             state.currentList = action.payload;
+            state.lists = [...state.lists]
+            state.wishlist = [...state.wishlist]
+            updateFirestoreState({...state});
         },
         removeFromCurrentList: (state, action) => {
             if (state.currentList.name === "Listen Later") {
@@ -62,11 +68,14 @@ const listSlice = createSlice({
 		},
         syncUserLists: (state, action) => {
 			state.lists = action.payload;
-		}
+		},
+        syncCurrentList: (state, action) => {
+            state.currentList = action.payload;
+        }
     }
 });
 
-export const { addWish, addNewList, addToList, syncUserWish, syncUserLists, setCurrentList, removeFromCurrentList } = listSlice.actions;
+export const { addWish, addNewList, addToList, syncUserWish, syncUserLists, syncCurrentList, setCurrentList, removeFromCurrentList } = listSlice.actions;
 
 export const listSelector = state => state.list
 
@@ -93,6 +102,7 @@ export const syncLists = (data) => {
 		try {
             dispatch(syncUserWish(data.wishlist));
             dispatch(syncUserLists(data.lists));
+            dispatch(syncCurrentList(data.currentList));
         } catch (err) {
             console.log(err)
         }

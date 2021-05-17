@@ -6,6 +6,7 @@ import logReducer from './slices/logSlice';
 import searchReducer from './slices/searchSlice';
 import albumReducer from './slices/albumSlice';
 import listReducer from './slices/listSlice';
+import artistReducer from './slices/artistSlice';
 
 const store = configureStore({
     reducer: {
@@ -13,11 +14,12 @@ const store = configureStore({
         log: logReducer,
         search: searchReducer,
         album: albumReducer,
-        list: listReducer
+        list: listReducer,
+        artist: artistReducer
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production',
-    enhancers: [reduxBatch],
+    enhancers: [reduxBatch]
 });
 
 export default store;

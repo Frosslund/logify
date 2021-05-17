@@ -30,8 +30,9 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 	});
 	
 	return (
+		<>
+		<UserInfo name={name} imageURL={imageURL} info={info}/>
 		<div class="listView">
-			<UserInfo name={name} imageURL={imageURL} info={info}/>
 				{wishlist.length !== 0 ?
 				<NavLink to="/lists/wishlist" onClick={() => setCurrentList({"albums": wishlist, "name": "Listen Later"})} className="wishlist__individual">
 					<div className="wishlist__image-stack">
@@ -106,6 +107,7 @@ const ListView = ({wishlist, lists, name, imageURL, setCurrentList}) => {
 				</tbody>
 			</table> */}
 		</div>
+		</>
 	);
 }
 
