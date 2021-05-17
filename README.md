@@ -43,6 +43,46 @@ App.scss - the sass file containing all css for the app
 
 fonts-folder - the font used for the app
 
-index.js - 
+index.js - renders the app
+
+presenters-folder:
+
+  -AlbumPresenter.js - connecting album state to view, dispatches logs and list additions
+
+  -ArtistView.js - connecting artist state to view, dispatches album and artist info
+
+  -ListPresenter.js - connecting list state to view, dispatches current list
+
+  -LogPresenter.js - connecting log state to view, dispatches album and artist info and logs and list additions
+
+  -NavbarPresenter.js - connecting user state to view, dispatches search queries and login details
+
+  -ResultsPresenter.js - connecting search state to view, dispatches album, artist info and logs
+
+  -SinglelistPresenter.js - connecting list state to view, dispatches create lists, edit lists
+
+slices-folder:
+
+  -albumSlice.js - redux handling of state concerning album information, this state gets persisted
+
+  -artistSlice.js - redux handling of state concerning artist information
+
+  -listSlice.js - redux handling of state concerning list information, this state gets persisted
+
+  -logSlice.js - redux handling of state concerning log information, this state gets persisted
+
+  -searchSlice - redux handling of state concerning search information
+
+  -userSlice - redux handling of state concerning user data information, fetched on reload
+
+
+
+
+
+
+
+
+
+
 
 
