@@ -2,9 +2,11 @@ import Paper from '@material-ui/core/Paper';
 import { RowDetailState, SortingState, IntegratedSorting } from '@devexpress/dx-react-grid';
 import { Grid, Table, TableHeaderRow, TableRowDetail } from '@devexpress/dx-react-grid-material-ui';
 import { NavLink } from 'react-router-dom';
+import Popup from 'reactjs-popup';
 
 import UserInfo from "./components/UserInfo";
 import calcRunningTime from "../utils/calcRunningTime";
+import AddToListComponent from "./components/AddToListComponent";
 
 
 const LogView =  (props) => {
@@ -13,35 +15,58 @@ const LogView =  (props) => {
 		logs,
 		name,
 		imageURL,
-    setAlbum
+    lists,
+    setAlbum,
+    onAddToWish,
+    onAddToList
 	} = props;
 
+  const openAlbum = (url) => {
+      window.open(url, "_blank");
+  }; 
+
   const RowDetail = ({ row }) => (
-    <div class="collapseContent">
+    <div className="collapseContent">
       {console.log(row.log)}
-      <div class="albumInfoLog">
+      <div className="albumInfoLog">
         <h6>ALBUM</h6>
         <NavLink to={`/album/${row.log.album.id}`} onClick={() => setAlbum(row.log.album)} key={row.log.album.id} >
           <h3>{row.log.album.name}</h3>
         </NavLink>
-        <h5 class="artistLog">
+        <h5 className="artistLog">
           <p>{row.log.album.artists.map(artist => {return artist + " "})}</p>
           <p>{row.log.album.totalTracks} songs</p>
           <p>{calcRunningTime(row.log.album.runningTime_ms)}</p>
         </h5>
-        <p class="buttons">
-          <button class="button">
-            Add to list
-          </button>
-          <button class="button" onClick="${row.log.album.externalUrl}">
-            Continue to Spotify
+        <p className="buttons">
+        <Popup
+          trigger={<button className="button">List <i class="fas fa-list"></i></button>}
+          modal
+          nested
+        >
+            {close => (
+              <AddToListComponent 
+                album={{...row.log.album}} 
+                name={row.log.album.name} 
+                images={row.log.album.images} 
+                released={row.log.album.released} 
+                artists={row.log.album.artists} 
+                close={close} 
+                lists={lists}
+                onAddToWish={onAddToWish}
+                onAddToList={onAddToList} 
+              />
+            )}
+          </Popup>
+          <button className="button" onClick={() => openAlbum(`spotify:album:${row.log.album.id}`)}>
+            <i class="fab fa-spotify"></i>
           </button>
         </p>
       </div>
       <div>
         <img alt="" src={row.log.album.images[1].url} />
       </div>
-      <div class="reviewLog">
+      <div className="reviewLog">
         <h5>Review:</h5>
         <p>{row.log.review === "" ? "No review yet, ready to add one?" : `"${row.log.review}"`}</p>
       </div>
@@ -55,7 +80,7 @@ const LogView =  (props) => {
     { name: 'album', title: 'Album' },
     { name: 'year', title: 'Released' },
     { name: 'rating', title: 'Rating' },
-    { name: 'relisten', title: 'Relisten\u0020\u21A9' }
+    { name: 'relisten', title: <i class="fas fa-history"></i>}
   ];
 
   function rowFix(logs) {
@@ -74,7 +99,7 @@ const LogView =  (props) => {
           album: <img class="logPic" alt="" src={logs[i].album.images[2].url} />,
           year: logs[i].album.released,
           rating: stars[Math.ceil(logs[i].rating)],
-          relisten: logs[i].firstListen === true ? "" : "\u21A9",
+          relisten: logs[i].firstListen === true ? "" : <i class="fas fa-history"></i>,
           log: logs[i]
         }
       ); 

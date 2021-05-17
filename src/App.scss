@@ -50,6 +50,10 @@ li {
     padding: 15px 5%;
     background-color: rgba(0, 0, 0, 0.6);
 
+    i {
+        font-size: 2rem;
+    }
+
     &__search {
         &__container {
             padding-top: 0px;
@@ -381,7 +385,7 @@ li {
     color: $color-light;
     display: flex;
     justify-content: center;
-    margin-top: 8rem;
+    margin-top: 2rem;
     text-align: center;
     font-size: 5rem;
     text-shadow: 0 0 3rem rgba($color-dark, 0.3),
@@ -405,6 +409,38 @@ li {
     text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
     font-size: smaller;
 
+    button {
+        i {
+            font-size: 1rem;
+            /* animation-name: spin;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear; */
+        }
+        font-size: 1.3rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+        margin-bottom: 1rem;
+        padding: 0.8rem;
+        border: 1px solid rgba($color-light, 0.7);
+        background-color: rgba($color-dark, 1);
+        box-shadow: 0 0 10rem rgba($color-dark, 0.5),
+            0.1rem 0.2rem 0.5rem rgba($color-dark, 0.7);
+        color: $color-light;
+        border-radius: 0.8rem;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: rgba($color-green, 1);
+        transition: all 0.8s ease 0s;
+        transform: scale(1.04);
+        cursor: pointer;
+        outline: none;
+    }
+
     h1 {
         font-weight: bolder;
         color: $color-light;
@@ -418,6 +454,11 @@ li {
         font-weight: normal;
     }
 
+    p {
+        padding-top: 1.1rem;
+        padding-left: 0.5rem;
+    }
+
     a:link {
         text-decoration: none;
     }
@@ -426,7 +467,7 @@ li {
         display: flex;
         flex-wrap: wrap;
         padding: 20px;
-        height: 520px;
+        height: 530px;
         background-color: rgba($color-dark, 0.5);
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.6);
         /* box-shadow: 0 0 10rem rgba(black, 0.3),
@@ -435,8 +476,8 @@ li {
 
         .image {
             box-sizing: border-box;
-            width: 50%;
-            height: min-content;
+            height: 80%;
+            //height: min-content;
             //border-radius: 0.4rem;
             //border-radius: 2px 10px 2px;
             //border-radius: 50%;
@@ -447,7 +488,7 @@ li {
 
         .title {
             box-sizing: border-box;
-            width: 50%;
+            width: 60%;
             padding-left: 20px;
             height: 440px;
             overflow: scroll;
@@ -513,6 +554,33 @@ li {
             }
         }
     }
+
+    .later-prompt {
+        &__visible {
+            animation: fadein 0.6s;
+            opacity: 1;
+        }
+
+        &__hidden {
+            animation: fadeout 0.6s;
+            opacity: 0;
+        }
+    }
+
+    .listen-spotify-button {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 0;
+        padding-bottom: 0;
+        i {
+            font-size: 2rem;
+            animation-name: spin;
+            animation-duration: 5000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+    }
+
     .toLogButton {
         box-sizing: border-box;
         width: 24%;
@@ -658,19 +726,28 @@ li {
         .buttons {
             padding-top: 20px;
             display: inline-flex;
+            flex-direction: column;
         }
 
         .button {
             height: fit-content;
-            background-color: rgba($color-dark, 0.5);
+            background-color: rgba($color-dark, 0.7);
             color: rgba($color-green, 0.9);
             text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.6);
             border-radius: 0.2rem;
             border: none;
             padding: 7px 15px;
+            margin-bottom: 1rem;
             text-align: right;
             font-weight: lighter;
             cursor: pointer;
+        }
+
+        .button:hover {
+            transition: all 0.3s ease 0s;
+            background-color: rgba($color-dark, 0.9);
+            transform: scale(1.03);
+            outline: none;
         }
     }
 
@@ -895,6 +972,53 @@ li {
     outline: none;
 }
 
+.logactionbuttons {
+    display: inline;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    background-color: rgba($color-dark, 0.5);
+    box-shadow: 0 0 10rem rgba(black, 0.3),
+        0.1rem 0.2rem 0.5rem rgba(black, 0.5);
+    color: $color-light;
+    border-radius: 0.4rem;
+    border: none;
+    text-align: center;
+    align-items: center;
+    display: inline-block;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    text-transform: initial;
+}
+
+.logactionbuttons:hover,
+.logactionbuttons:focus {
+    transition: all 0.3s ease 0s;
+    background-color: rgba($color-green, 0.7);
+    transform: scale(1.04);
+    outline: none;
+}
+
+.loginButton {
+    margin-top: 4rem;
+    font-size: 1.5rem;
+    background-color: rgba($color-green, 0.7);
+    padding: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-radius: 4rem;
+}
+
+.loginButton:hover {
+    background-color: rgba($color-green, 0.9);
+}
+
 @keyframes anvil {
     0% {
         transform: scale(1) translateY(0px);
@@ -1054,6 +1178,12 @@ li {
 }
 
 .lists {
+    margin-top: 2rem;
+
+    &__no-list {
+        text-align: center;
+    }
+
     &__individual {
         display: grid;
         grid-template-columns: 2fr 1fr;
@@ -1187,11 +1317,12 @@ li {
     &__infobox {
         h1 {
             font-size: 3rem;
-            text-decoration: underline;
+            text-shadow: 0.1rem 0.1rem 0.3rem $color-dark, 0 0 4rem $color-dark;
         }
 
         p {
             color: $color-light;
+            text-shadow: 0.1rem 0.1rem 0.3rem $color-dark, 0 0 4rem $color-dark;
             font-weight: 100;
         }
 
@@ -1232,6 +1363,14 @@ li {
             display: inline-block;
         }
 
+        img:hover {
+            transition: all 0.3s ease 0s;
+            transform: scale(1.02);
+            background: rgba($color-green, 0.2);
+            cursor: pointer;
+            outline: none;
+        }
+
         p {
             display: inline-block;
             justify-content: center;
@@ -1246,15 +1385,165 @@ li {
     }
 
     &__deleteButton {
+        animation: fadein 0.6s;
         background: rgba(rgb(228, 39, 39), 0.8);
         border: 1px solid $color-light;
         color: $color-light;
         position: absolute;
         font-size: 1.5rem;
         border-radius: 50%;
-        padding: 0.2rem 0.6rem;
+        padding: 0.3rem 0.7rem;
         z-index: 1;
         margin-left: 14%;
         margin-top: 0.5rem;
+    }
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeout {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    &__deleteButton:hover {
+        background: rgba(rgb(228, 39, 39), 1);
+        transition: all 0.3s ease 0s;
+        transform: scale(1.02);
+        cursor: pointer;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.new-releases {
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    margin-top: 2rem;
+    grid-column-gap: 1rem;
+    &__item {
+        padding-top: 0.5rem;
+        text-decoration: none;
+        outline: none;
+        background: linear-gradient(
+            to bottom,
+            rgba($color-green, 1),
+            rgba($color-green, 0)
+        );
+        border-radius: 1rem;
+        overflow: hidden;
+        height: 30rem;
+        img {
+            height: 40%;
+            border-radius: 1rem;
+        }
+
+        img:hover {
+            transition: all 0.6s ease 0s;
+            transform: scale(1.03);
+            cursor: pointer;
+            outline: none;
+        }
+
+        &__artist {
+            font-size: 0.8rem;
+            font-weight: 100;
+            text-decoration: none;
+            outline: none;
+            color: inherit;
+        }
+
+        &__album {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            text-decoration: none;
+            outline: none;
+            color: inherit;
+        }
+
+        &__artist:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        &__album:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        &__album:visited {
+            text-decoration: none;
+            color: $color-light;
+        }
+
+        &__buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        button {
+            i {
+                font-size: 1.5rem;
+                animation-name: spin;
+                animation-duration: 5000ms;
+                animation-iteration-count: infinite;
+                animation-timing-function: linear;
+            }
+            font-size: 1rem;
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            margin-top: 0.7rem;
+            padding: 0.6rem;
+            background-color: rgba($color-dark, 0.8);
+            box-shadow: 0 0 10rem rgba($color-dark, 0.5),
+                0.1rem 0.2rem 0.5rem rgba($color-dark, 0.7);
+            color: $color-light;
+            border-radius: 0.5rem;
+            border: none;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: rgba($color-dark, 1);
+            transition: all 0.8s ease 0s;
+            transform: scale(1.04);
+            cursor: pointer;
+            outline: none;
+        }
+
+        button:active {
+            outline: none;
+        }
+
+        p {
+            text-decoration: none;
+            outline: none;
+        }
+    }
+
+    &__header {
+        font-size: 3rem;
+        text-decoration: underline;
+        margin-top: 4rem;
     }
 }

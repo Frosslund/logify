@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const AddToListComponent = ({ album, name, images, released, artists, close, lists, onAddToWish, onAddToList }) => {
 
@@ -6,24 +7,61 @@ const AddToListComponent = ({ album, name, images, released, artists, close, lis
         name: "Select list..", 
         newName: "",
         show: false,
-        error: false
+        error: false,
+        nameError: false,
+        alreadyExistError: false,
+        complete: false
     });
+
+    const currentListNames = []
+    lists.forEach(list => {
+        currentListNames.push(list.name)
+    })
 
     const handleSelect = (e) => {
 		setListState({...listState, name: e, error: false})
-        console.log(listState)
 	};
 
-    const handleSubmit = () => {
-        if (listState.name !== "Select list.." || listState.newName !== "") {
-            listState.newName !== "" ? 
-            onAddToList(false, listState.newName, album)
-            :
-            onAddToList(true, listState.name, album)
-            ;
-            close()
+    const checkList = (album, listOfAlbums) => {
+        let returnValue = false;
+        listOfAlbums.forEach(specAlbum => {
+            if(specAlbum.id === album.id) {
+                returnValue = true;
+            }
+        });
+        return returnValue;
+    }
+
+    const handleInitialSubmit = () => {
+        let errorValue = false;
+        lists.forEach(list => {
+            if (list.name === listState.name && checkList(album, list.albums)) {
+                setListState({...listState, error: true, alreadyExistError: true})
+                errorValue = true;
+            };
+        });
+        if (errorValue) {
+            return;
         } else {
-            setListState({...listState, error: true})
+            handleSubmit();
+        }
+    }
+
+    const handleSubmit = () => {
+        if (!currentListNames.includes(listState.newName)) {
+            if (listState.name !== "Select list.." || listState.newName !== "") {
+                listState.newName !== "" ? 
+                onAddToList(false, listState.newName, album)
+                :
+                onAddToList(true, listState.name, album)
+                ;
+                /* close() */
+                setListState({...listState, complete: true})
+            } else {
+                setListState({...listState, error: true})
+            }
+        } else {
+            setListState({...listState, error: true, nameError: true})
         }
     }
 
@@ -38,7 +76,6 @@ const AddToListComponent = ({ album, name, images, released, artists, close, lis
     const handleNewClickUndo = () => {
         setListState({...listState, show: false})
     }
-
     return (
         <div className="popup">
             <button className="popup__close" onClick={close}>
@@ -46,11 +83,12 @@ const AddToListComponent = ({ album, name, images, released, artists, close, lis
             </button>
             <img className="popup__image" src={images[1].url}  alt="" />
 
+            {!listState.complete ?
             <div className="popup__content">
                 <h3>{name}    		<span>		{released}</span></h3>
                 <p>{artists.map(artist => {return artist + " "})}</p>
 
-                {lists.length > 0 ? <h4>ADD ALBUM TO LIST:</h4> : <h4></h4>}
+                {lists.length > 0 ? <h4>ADD ALBUM TO LIST:</h4> : <span></span>}
                 <div>
                     {lists.length > 0 ? <select selected="selected" onClick={handleNewClickUndo} className="popup__list-select" value={listState.name} onChange={e => handleSelect(e.target.value)}>
                         <option key={0} value="Select list.." selected="true" defaultValue>Select list..</option>
@@ -68,8 +106,15 @@ const AddToListComponent = ({ album, name, images, released, artists, close, lis
                     }
                 </div>
 
-                <button className="saveButton" onClick={handleSubmit}>SAVE</button>{listState.error ? <span className="popup__list-error-message">Please select a list or create a new one!</span> : <span></span>}
+                <button className="saveButton" onClick={handleInitialSubmit}>SAVE</button>{listState.error ? <span className="popup__list-error-message">{listState.nameError ? "A list with this name already exists, please select another name!" : listState.alreadyExistError ? "You already have this album in the chosen list!" : "Please select a list or create a new one!"}</span> : <span></span>}
             </div>
+            :
+            <div className="popup__content">
+                <p>Album added to {listState.newName === "" ? `list ${listState.name}` : `new list ${listState.newName}`}</p>
+                <NavLink to="/lists" className="logactionbuttons">Go to your lists</NavLink>
+                <button className="logactionbuttons" onClick={() => close()}>Close</button>
+            </div>
+            }
 
         </div>
     )
