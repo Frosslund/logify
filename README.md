@@ -2,7 +2,7 @@
 
 ## How to use the app
 
-The app can be found deployed here [here](https://logify.netlify.app/home). Login using your own Spotify account or using our test account:
+The app can be found deployed [here](https://logify.netlify.app/home). Login using your own Spotify account or using our test account:
 
 user: `dh2642logify@gmail.com`
 
@@ -23,6 +23,34 @@ The file structure follows create-react-app. In the scr-folder we have structure
 
 Each file and what the do:
 
+-singleListView.js - view to display a single list, which can be the “Listen Later”-list as well as a user created list. From here, albums can be removed from the list and a Spotify playlist based on the albums contained in the list can be created for authorized user. 
+
+-Router.js - this file controls which view is rendered based on current URL, using React Router. As such, it imports the various presenters and uses them as the component-prop.
+
+-ResultsView.js - view that controls the content of the landing page, and as well the search results when the user initiates a search. As the user enters a search in the input field in the Navbar component, a request will be sent to various endpoints at the Spotify API, which in turn will return albums and artists, including a generated “top result” based on popularity. If no search has been initiated, the view will display curated new releases which is obtained through the Spotify API and updated continuously. 
+
+-Navbar.js - header component of the app. Always stays visible at any point. It has three main sections, which includes the logo (which also acts as a home button), a search input bar to make searches for albums and artists, and a few links to various pages in the app, including authorization buttons to handle login/logout. 
+
+-LogView.js - view to display the log, which acts as the personal diary of logged albums for the user. All logged albums are displayed in a table which can be sorted based on several criteria, and each logged albums can additionally be collapsed to display further information. When collapsed, logged albums can from here be added to lists, and there is also an option to open the Spotify desktop app and listen to the chosen album there. 
+
+-ListView.js - view to display the users collection of lists, which includes the “Listen Later”-list as well as user created lists. All items are clickable, which would take the user to that the chosen specific list. 
+
+-Footer.js - simple footer component. Fades out when the y-offset of the page is non-zero. 
+
+-ArtistView.js - view to display information about one specific artist. On page load, various endpoints of the Spotify API will be queried and the response will be cleaned up to display a list of that artists albums. A list of related artists will also be rendered, for which the user can click on any related artist to get to that artists page. 
+
+-App.js - main application file of the project. Responsible of rendering the Router-file as well as the Navbar and Footer respectively. Also makes continuous checks against the currently generated authorization token, to make sure that the page performs a logout once the expiry time has been reached. 
+
+-AlbumView.js - view that renders information of one specific album. This includes an image of the album cover, title and artist information and a list of tracks. All tracks can be played using an embedded web audio player. The view also contains four buttons, responsible for adding that album to the log, adding the album to a list, adding the album to the specific “Listen Later”-list and opening the album in the Spotify desktop app. 
+
+-UserInfo.js - component used for the log and lists to display user info regarding the number of logged albums, the last logged albums and the number of lists. Also contains the profile picture of the user, or a default picture for users without a profile picture. 
+
+-LoadingSpinner.js - simple component which is visible during loading states at various places in the app.
+
+-AddToLogComponent.js - popup component used to generate a diary entry for a specific album. The user gives the album a rating, and can optionally add a written review. Once the album is saved, the album can be seen in the log. 
+
+-AddToListComponent.js - popup component used to add a specific album to a list. The user can either create a new list or add the album to an already existing list. The component contains error checks to make sure that two lists does not share the same name, and as well that one specific album is not added in the same list twice.
+
 -App.scss - the sass file containing all css for the app
 
 -index.js - renders the app
@@ -33,7 +61,7 @@ Each file and what the do:
 
   -AlbumPresenter.js - connecting album state to view, dispatches logs and list additions
 
-  -ArtistView.js - connecting artist state to view, dispatches album and artist info
+  -ArtistPresenter.js - connecting artist state to view, dispatches album and artist info
 
   -ListPresenter.js - connecting list state to view, dispatches current list
 
