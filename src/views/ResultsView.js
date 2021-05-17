@@ -148,7 +148,7 @@ const ResultsView = ({albums, artists, topResult, user, setAlbum, setArtist}) =>
 									{artist.name}
 								</div>
 								<div className="gallery__item__info--genres">
-									{artist.genres.toString()}
+									{artist.genres.slice(0, 2).join(', ')}
 								</div>
 							</div>
 						</NavLink>

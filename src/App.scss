@@ -1289,6 +1289,7 @@ li {
   text-transform: uppercase;
   font-weight: 300;
   background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10rem rgba(black, 0.3), 0.1rem 0.2rem 0.5rem rgba(black, 0.4);
 
   h1 {
     color: rgba($color-green, 0.9);
@@ -1313,6 +1314,14 @@ li {
     text-decoration: underline rgba($color-green, 0.9);
     text-underline-offset: 5px;
   }
+
+  .genres {
+    padding-top: 10px;
+    text-decoration: none;
+    text-transform: none;
+    color: $color-light;
+  }
+
   .relatedArtists {
     display: flex;
     justify-content: space-between;

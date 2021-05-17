@@ -16,6 +16,7 @@ const ArtistView = (props) => {
 					<img alt="" src={artist.image.url} />
 					<div class="artistName">
 						<h1>{artist.name}</h1>
+						<h5 class="genres">{artist.genres.slice(0, 2).join(', ')}</h5>
 					</div>
 					<div class="vl"></div>
 					<div class="relatedArtists">

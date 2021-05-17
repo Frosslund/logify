@@ -20,6 +20,7 @@ const initialState = {
                 url: ''
             }]
         }],
+        genres: []
     },
     relatedArtists: [{
         images: [{
@@ -36,6 +37,7 @@ const artistSlice = createSlice({
             state.artist.name = action.payload.name
             state.artist.popularity = action.payload.popularity
             state.artist.image = action.payload.images[0]
+            state.artist.genres = action.payload.genres
         },
         setAlbums: (state, action) => {
             state.artist.albums = action.payload
