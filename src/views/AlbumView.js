@@ -4,6 +4,7 @@ import AddToLogComponent from "./components/AddToLogComponent";
 import AddToListComponent from "./components/AddToListComponent";
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
+import LoadingSpinner from './components/LoadingSpinner';
 
 const AlbumView = (props) => {
 
@@ -18,6 +19,7 @@ const AlbumView = (props) => {
 		runningTime_ms,
 		popularity,
 		externalUrl,
+		loading,
 		lists,
 		onAddToLog,
 		onAddToWish,
@@ -43,6 +45,9 @@ const AlbumView = (props) => {
 	
 	return (
 		<div class="albumView">
+			{loading ?
+			<LoadingSpinner />
+			:
 			<div class="top">
 				<img class="image" src={images[0].url}  alt="" />
 				<div class="title">
@@ -118,6 +123,7 @@ const AlbumView = (props) => {
 						)}
 					</table>
 				</div>
+				<div>
 				<Popup
 				trigger={<button> Log <i class="fas fa-pencil-alt"></i></button>}
 				modal
@@ -150,10 +156,12 @@ const AlbumView = (props) => {
 					Later <i class="far fa-clock"></i>
 				</button>
 				<button onClick={() => openAlbum(`spotify:album:${id}`)} className="listen-spotify-button"><i class="fab fa-spotify"></i></button>
-				<p className={`later-prompt__${albumAdded ? "visible" : "hidden"}`}>Album added to "Listen Later"!</p>
+				</div>
+				<span></span>
+				<span className={`later-prompt__${albumAdded ? "visible" : "hidden"}`}>Album added to "Listen Later"!</span>
 			</div>
-		</div>
-		
+			}
+		</div>		
 	)
 }
 

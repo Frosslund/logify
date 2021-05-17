@@ -6,7 +6,8 @@ const initialState = {
     topResult: {},
     albums: [],
     artists: [],
-    newReleases: []
+    newReleases: [],
+    loading: false
 }
 
 const searchSlice = createSlice({
@@ -24,11 +25,14 @@ const searchSlice = createSlice({
         },
         setNewReleases: (state, action) => {
             state.newReleases = action.payload;
+        },
+        setLoadingState: (state, action) => {
+            state.loading = action.payload;
         }
     }
 });
 
-export const { setAlbumResults, setArtistsResults, setTopResult, setNewReleases } = searchSlice.actions;
+export const { setAlbumResults, setArtistsResults, setTopResult, setNewReleases, setLoadingState } = searchSlice.actions;
 
 export const searchSelector = state => state.search
 
@@ -37,6 +41,7 @@ export default searchSlice.reducer
 export const initiateSearch = (searchTerm) => {
     return async (dispatch) => {
         try {
+            dispatch(setLoadingState(true))
             const API_URL = REACT_APP_BASE_URL + `/search?query=${encodeURIComponent(searchTerm)}&type=album,artist&limit=50`
             const searchData = await get(API_URL)
             const artistData = searchData.artists.items.sort((a, b) => (a.popularity < b.popularity) ? 1 : -1).slice(0, 20)
@@ -53,6 +58,7 @@ export const initiateSearch = (searchTerm) => {
             dispatch(setTopResult(sortedAlbums[0]))
             dispatch(setAlbumResults(sortedAlbums))
             dispatch(setArtistsResults(artistData))
+            dispatch(setLoadingState(false))
         } catch (err) {
             console.log(err)
         }
@@ -62,10 +68,17 @@ export const initiateSearch = (searchTerm) => {
 export const getNewReleases = () => {
     return async (dispatch) => {
         try {
+            dispatch(setLoadingState(true))
             const API_URL = REACT_APP_BASE_URL + '/browse/new-releases?limit=50';
             const releaseData = await get(API_URL)
             const albumsData = releaseData.albums.items.filter(item => item.album_type !== "single")
-            dispatch(setNewReleases(albumsData))
+            let albumIds = albumsData.map(album => album.id)
+            if (albumIds.length > 20) {
+                albumIds = albumIds.slice(0, 20)
+            }
+            const data = await get(REACT_APP_BASE_URL + `/albums?ids=${albumIds.toString()}`)
+            dispatch(setNewReleases(data))
+            dispatch(setLoadingState(false))
         } catch (err) {
             console.log(err)
         }

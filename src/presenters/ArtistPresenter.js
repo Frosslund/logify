@@ -7,6 +7,7 @@ const mapStateToProps = (state) => {
     return {
         artist: state.artist.artist,
         relatedArtists: state.artist.relatedArtists,
+        loading: state.artist.loading
     };
 }
 
