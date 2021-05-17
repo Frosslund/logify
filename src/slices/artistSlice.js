@@ -26,7 +26,8 @@ const initialState = {
         images: [{
                 url: ''
             }]
-    }]
+    }],
+    loading: false
 }
 
 const artistSlice = createSlice({
@@ -44,11 +45,14 @@ const artistSlice = createSlice({
         },
         setRelated: (state, action) => {
             state.relatedArtists = action.payload
+        },
+        setLoadingState: (state, action) => {
+            state.loading = action.payload;
         }
     }
 });
 
-export const { setArtist, setAlbums, setRelated } = artistSlice.actions;
+export const { setArtist, setAlbums, setRelated, setLoadingState } = artistSlice.actions;
 
 export const artistSelector = state => state.artist
 
@@ -73,6 +77,7 @@ export const fetchArtist = (id) => {
 
     return async (dispatch) => {
         try {
+            dispatch(setLoadingState(true));
             const API_URL_ARTIST = REACT_APP_BASE_URL + `/artists/${id}`
             const API_URL_RELATED_ARTISTS = REACT_APP_BASE_URL + `/artists/${id}/related-artists`
             const API_URL_ARTIST_ALBUMS1 = REACT_APP_BASE_URL + `/artists/${id}/albums?limit=50&include_groups=album`
@@ -100,6 +105,7 @@ export const fetchArtist = (id) => {
             dispatch(setArtist(artistData))
             dispatch(setAlbums(noDups))
             dispatch(setRelated(sortedRelatedPop.slice(0, 5)))
+            dispatch(setLoadingState(false));
         } catch (err) {
             console.log(err)
         }

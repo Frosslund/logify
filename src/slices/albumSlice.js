@@ -15,7 +15,7 @@ const initialState = {
     released: '',
     runningTime_ms: 0,
     popularity: 0,
-    externalUrl: ''
+    loading: false
 }
 
 const albumSlice = createSlice({
@@ -32,7 +32,6 @@ const albumSlice = createSlice({
             state.released = action.payload.released;
             state.runningTime_ms = action.payload.runningTime_ms;
             state.popularity = action.payload.popularity;
-            state.externalUrl = action.payload.externalUrl;
             updateFirestoreState({album: {...state}})
         },
         syncUserAlbum: (state, action) => {
@@ -45,14 +44,17 @@ const albumSlice = createSlice({
             state.released = action.payload.released;
             state.runningTime_ms = action.payload.runningTime_ms;
             state.popularity = action.payload.popularity;
-            state.externalUrl = action.payload.externalUrl;
+        },
+        setLoadingState: (state, action) => {
+            state.loading = action.payload;
         }
     }
 });
 
 export const {
     setAlbum,
-    syncUserAlbum
+    syncUserAlbum,
+    setLoadingState
 } = albumSlice.actions;
 
 export const albumSelector = state => state.album 
@@ -85,12 +87,12 @@ export const fetchAlbum = (album, fromSearch=false) => {
 
     return async dispatch => {
         try {
+            dispatch(setLoadingState(true))
             //const album = await get(`${REACT_APP_BASE_URL}/albums/${id}`);
             let artists = []
             let tracks = []
             let runningTime = 0
             let released = ''
-            let externalUrl = ''
             let totalTracks = 0
             if (fromSearch) {
                 artists = fixArtists(album.artists) 
@@ -98,14 +100,12 @@ export const fetchAlbum = (album, fromSearch=false) => {
                 tracks = trackFix[0]
                 runningTime = trackFix[1]
                 released = album.release_date.split("-", 1).pop()
-                externalUrl = album.external_urls.spotify
                 totalTracks = album.total_tracks
             } else {
                 artists = album.artists
                 tracks = album.tracks
                 runningTime = album.runningTime_ms
                 released = album.released
-                externalUrl = album.externalUrl
                 totalTracks = album.totalTracks
             }
             const fixedAlbum = {
@@ -118,9 +118,9 @@ export const fetchAlbum = (album, fromSearch=false) => {
                 released: released,
                 runningTime_ms: runningTime,
                 popularity: album.popularity,
-                externalUrl: externalUrl
             }
-            dispatch(setAlbum(fixedAlbum))       
+            dispatch(setAlbum(fixedAlbum))
+            dispatch(setLoadingState(false))       
         } catch (err) {
             console.log(err)
         }
@@ -130,7 +130,9 @@ export const fetchAlbum = (album, fromSearch=false) => {
 export const syncAlbum = (data) => {
     return dispatch => {
 		try {
+            dispatch(setLoadingState(true));
             dispatch(syncUserAlbum(data.album));
+            dispatch(setLoadingState(false));
         } catch (err) {
             console.log(err)
         }

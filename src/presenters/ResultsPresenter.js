@@ -11,6 +11,7 @@ const mapStateToProps = (state) => {
         artists: state.search.artists,
         topResult: state.search.topResult,
         newReleases: state.search.newReleases,
+        loading: state.search.loading,
         user: state.user.userName
     };
 }

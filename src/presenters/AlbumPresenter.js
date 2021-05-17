@@ -17,6 +17,7 @@ const mapStateToProps = (state) => {
         runningTime_ms: state.album.runningTime_ms,
         popularity: state.album.popularity,
         externalUrl: state.album.externalUrl,
+        loading: state.album.loading,
         lists: state.list.lists
     };
 }
