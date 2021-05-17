@@ -23,6 +23,8 @@ The file structure follows create-react-app. In the scr-folder we have structure
 
 Each file and what the do:
 
+##view-folder
+
 -singleListView.js - view to display a single list, which can be the “Listen Later”-list as well as a user created list. From here, albums can be removed from the list and a Spotify playlist based on the albums contained in the list can be created for authorized user. 
 
 -Router.js - this file controls which view is rendered based on current URL, using React Router. As such, it imports the various presenters and uses them as the component-prop.
