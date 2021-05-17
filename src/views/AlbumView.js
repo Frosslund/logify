@@ -73,6 +73,7 @@ const AlbumView = (props) => {
 								<span class="play">&#9835;</span>
 							</th>
 						</tr>
+						{console.log(tracks)}
 						{tracks.map(track => {
 							
 							var id = track.id;
@@ -108,7 +109,7 @@ const AlbumView = (props) => {
 							const track_min = Math.ceil(track.duration_ms/1000)
 							return (
 								<tr key={track.id}>
-									<td><span class="number">{track.track_number}</span></td>
+									<td>{track.track_number}</td>
 									<td>{track.name}</td>
 									<td>{Math.floor(track_min/60)}:{track_min%60 >= 10 ? track_min%60 : (track_min%60).toString().padStart(2, "0")}</td>
 									<td><button class="playButton" onClick={play}>&#5125;</button></td>

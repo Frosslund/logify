@@ -124,6 +124,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, loading, user, se
 					<NavLink
 						to={`/artist/${topResult.id}`}
 						key={topResult.id}
+						onClick={() => setArtist(topResult.id)}
 						className="gallery__item gallery_top__topresult"
 					>
 						<div className="gallery__item__wrapper">
