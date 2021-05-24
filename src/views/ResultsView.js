@@ -55,7 +55,7 @@ const ResultsView = ({albums, artists, topResult, newReleases, loading, user, se
 										<p className="new-releases__item__album">{release.name}</p>
 									</NavLink>
 									<div className="new-releases__item__buttons">
-										<button onClick={() => openAlbum(`spotify:album:${release.id}`)} className="new_releases__item__link"><i class="fab fa-spotify"></i></button>			
+										<button onClick={() => openAlbum(`spotify:album:${release.id}`)} className="new_releases__item__link"><i className="fab fa-spotify"></i></button>			
 									</div>
 								</div>
 							);
