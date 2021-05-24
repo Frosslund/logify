@@ -73,7 +73,6 @@ const AlbumView = (props) => {
 								<span class="play">&#9835;</span>
 							</th>
 						</tr>
-						{console.log(tracks)}
 						{tracks.map(track => {
 							
 							var id = track.id;
