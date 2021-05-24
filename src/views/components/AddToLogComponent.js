@@ -7,17 +7,16 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
     const [logState, setLogState] = useState({
         rating: 0,
         review: "",
-        complete: false
+        complete: false,
+        error: false
     });
 
     const handleRating = (newRating) => {
 		setLogState({ ...logState, rating: newRating })
-        console.log(logState)
 	};
 
     const handleReview = (newReview) => {
         setLogState({ ...logState, review: newReview })
-        console.log(logState)
     }
 
     const handleSubmit = () => {
@@ -26,7 +25,10 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
             setLogState({...logState, complete: true})
             /* close(); */
         } else {
-            console.log("Fill in rating!");
+            setLogState({...logState, error: true})
+            setTimeout(() => {
+                setLogState({...logState, error: false})
+            }, 2500);
         }
     }
 
@@ -53,6 +55,7 @@ const AddToLogComponent = ({ album, name, images, released, artists, close, onAd
                 <textarea onChange={e => handleReview(e.target.value)} value={logState.review} placeholder="Add review.." cols="60" rows="10"></textarea>
 
                 <button className="saveButton" onClick={handleSubmit}>SAVE</button>
+                {logState.error ? <span className="logErrorButton">Please fill in a rating!</span> : <span></span>}
             </div>
             :
             <div className="popup__content">
