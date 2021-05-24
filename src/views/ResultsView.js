@@ -5,7 +5,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 
 const ResultsView = ({albums, artists, topResult, newReleases, loading, user, setAlbum, getNewReleases, onAddToLog, setArtist }) => {
 
-	if (newReleases.length === 0) {
+	if (newReleases.length === 0 && localStorage.loggedIn) {
 		getNewReleases();
 	}
 
